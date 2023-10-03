@@ -32,7 +32,7 @@ code {
 
 /* Задаем цвет текста для заголовков и ссылок в навигации и округлые углы */
 header h1, nav a {
-  color: #4F4A41;
+  color: #88BDBC;
   border-radius: 10px;
   padding: 5px;
 }
