@@ -1,0 +1,70 @@
+/* Задаем цвет фона для всего документа */
+body {
+  background-color: #254E58;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Задаем цвет текста для основного контента и округлые углы */
+p, h1, h2, h3, h4, h5, h6, ul, ol, li {
+  color: #88BDBC;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Задаем цвет текста для ссылок и округлые углы */
+a {
+  color: #112D32;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/* Задаем цвет фона для блоков кода и округлые углы */
+code {
+  background-color: #6E6658;
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/* Задаем цвет текста для заголовков и ссылок в навигации и округлые углы */
+header h1, nav a {
+  color: #4F4A41;
+  border-radius: 10px;
+  padding: 5px;
+}
+header {
+  background-color: #112D32;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Задаем цвет фона для кнопок и округлые углы */
+button {
+  background-color: #88BDBC;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+/* Задаем цвет текста для футера и округлые углы */
+footer {
+  background-color: #254E58;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px 0;
+}
+
+main {
+  padding: 20px;
+  margin-top: 60px; /* Учитывает высоту навигации */
+  margin-bottom: 60px; /* Учитывает высоту футера */
+}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Главная страница{% endblock title %}
+{% block header %}Главная{% endblock header %}
+{% block content %}
+    {%if id == '0'%}
+        <div>
+            Сотрудник не найден
+        </div>
+    {%endif%}
+    <div>
+        <form action="/person">
+            <button name="id" value="0">0</button>
+            <button name="id" value="1">1</button>
+            <button name="id" value="2">2</button>
+            <button name="id" value="3">3</button>
+        </form>
+    </div>
+{% endblock content %}
