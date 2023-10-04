@@ -2,7 +2,32 @@
 {% block title %}Сотрудник {{id}}{% endblock title %}
 {% block header %}Сотрудник {{id}}{% endblock header %}
 {% block content %}
+{% load static %}
     <div>
-        Person id : {{id}}
+        Номер: {{id}}
+    </br>
+        {{rank}} {{name}} {{second_name}} {{third_name}}
+    </br> 
+        {{post}} {{group}}, приказ о назначении на должность {{appointment_order_num}} от {{appointment_order_date}}
+    </br>
+        Личный номер: {{personal_num}}
+    </br>
+        Дата рождения - {{b_day}}
+    </br>
+        Место рождения - {{place_of_bd}}
+    </br>
+        Номер телефона: {{phone_number}}
+    </br>
+        Адрес места жительства: {{address}}
+    </br>
+        Семейное положение: {{family_status}}
+    </br>
     </div>
+
+</br>
+</br>
+</br>
+<a href="/"><img src="{% static "images/red.png" %}"></a>
+<a href="/"><img src="{% static "images/green.png" %}"></a>
 {% endblock content %}
+
