@@ -2,17 +2,43 @@
 {% block title %}Главная страница{% endblock title %}
 {% block header %}Главная{% endblock header %}
 {% block content %}
-    {%if id == '0'%}
-        <div>
-            Сотрудник не найден
-        </div>
-    {%endif%}
+    {{text}}
     <div>
-        <form action="/person">
-            <button name="id" value="0">0</button>
-            <button name="id" value="1">1</button>
-            <button name="id" value="2">2</button>
-            <button name="id" value="3">3</button>
-        </form>
+        <table>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Звание</th>
+                <th>Должность</th>
+                <th>Дата рождения</th>
+                <th>Личный номер</th>
+                <th>Номер телефона</th>
+                <th>Адрес</th>
+                <th>Группа</th>
+                <th>Семейный статус</th>
+                <th>Место рождения</th>
+                <th>Номер приказа о назначении</th>
+                <th>Дата приказа</th>
+            </tr>
+          {%for person in data%}
+            <tr>
+                <th>{{person.name}}</th>
+                <th>{{person.second_name}}</th>
+                <th>{{person.third_name}}</th>
+                <th>{{person.rank}}</th>
+                <th>{{person.post}}</th>
+                <th>{{person.b_day}}</th>
+                <th>{{person.personal_num}}</th>
+                <th>{{person.phone_number}}</th>
+                <th>{{person.address}}</th>
+                <th>{{person.group}}</th>
+                <th>{{person.family_status}}</th>
+                <th>{{person.place_of_bd}}</th>
+                <th>{{person.appointment_order_num}}</th>
+                <th>{{person.appointment_order_date}}</th>
+            </tr>
+          {% endfor %}
+        </table>
     </div>
 {% endblock content %}
