@@ -4,39 +4,27 @@
 {% block content %}
     {{text}}
     <div>
-        <table>
+        <table id ='my_table'>
             <tr>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Отчество</th>
-                <th>Звание</th>
-                <th>Должность</th>
-                <th>Дата рождения</th>
-                <th>Личный номер</th>
-                <th>Номер телефона</th>
-                <th>Адрес</th>
-                <th>Группа</th>
-                <th>Семейный статус</th>
-                <th>Место рождения</th>
-                <th>Номер приказа о назначении</th>
-                <th>Дата приказа</th>
+                <th onclick="sortTable(0)">ФИО</th>
+                <th onclick="sortTable(1)">Звание</th>
+                <th onclick="sortTable(2)">Должность</th>
+                <th onclick="sortTable(3)">Группа</th>
+                
             </tr>
-          {%for person in data%}
+          {%for employee in data%}
             <tr>
-                <th>{{person.name}}</th>
-                <th>{{person.second_name}}</th>
-                <th>{{person.third_name}}</th>
-                <th>{{person.rank}}</th>
-                <th>{{person.post}}</th>
-                <th>{{person.b_day}}</th>
-                <th>{{person.personal_num}}</th>
-                <th>{{person.phone_number}}</th>
-                <th>{{person.address}}</th>
-                <th>{{person.group}}</th>
-                <th>{{person.family_status}}</th>
-                <th>{{person.place_of_bd}}</th>
-                <th>{{person.appointment_order_num}}</th>
-                <th>{{person.appointment_order_date}}</th>
+                <td>
+                    <form action='person' method='POST'>
+                        {% csrf_token %}
+                        <button name='employee_id' value="{{employee.id}}">
+                            {{employee.name}} {{employee.second_name}} {{employee.third_name}}
+                        </button>
+                    </form>
+                </td>
+                <td>{{employee.rank}}</td>
+                <td>{{employee.post}}</td>
+                <td>{{employee.group}}</td>
             </tr>
           {% endfor %}
         </table>

@@ -3,31 +3,56 @@
 {% block header %}Сотрудник {{id}}{% endblock header %}
 {% block content %}
 {% load static %}
+<h2>{{text}}</h2>
+<h1>{{employee.name}} {{employee.second_name}} {{employee.third_name}}</h1>
+<table>
+    <tr>
+        <th>Звание</th>
+        <th>Должность</th>
+        <th>Группа</th>
+        <th>Номер приказа о назначении на должность</th>
+        <th>Дата приказа</th>
+        <th>Личный номер</th>
+        <th>Дата Рождения</th>
+        <th>Место рождения</th>
+        <th>Семейное положение</th>
+        <th>Номер телефона</th>
+        <th>Адрес места жительства</th>
+    </tr>
+    <tr>
+        <td>{{employee.rank}}</td>
+        <td>{{employee.post}}</td>
+        <td>{{employee.group}}</td>
+        <td>{{employee.appointment_order_num}}</td>
+        <td>{{employee.appointment_order_date}}</td>
+        <td>{{employee.personal_num}}</td>
+        <td>{{employee.b_day}}</td>
+        <td>{{employee.place_of_bd}}</td>
+        <td>{{employee.family_status}}</td>
+        <td>{{employee.phone_number}}</td>
+        <td>{{employee.address}}</td>
+    </tr>
+</table>
+</br>
     <div>
-        Номер: {{id}}
-    </br>
-        {{rank}} {{name}} {{second_name}} {{third_name}}
-    </br> 
-        {{post}} {{group}}, приказ о назначении на должность {{appointment_order_num}} от {{appointment_order_date}}
-    </br>
-        Личный номер: {{personal_num}}
-    </br>
-        Дата рождения - {{b_day}}
-    </br>
-        Место рождения - {{place_of_bd}}
-    </br>
-        Номер телефона: {{phone_number}}
-    </br>
-        Адрес места жительства: {{address}}
-    </br>
-        Семейное положение: {{family_status}}
-    </br>
+        <form method="POST" action="/person">
+            {%csrf_token%}
+            <input type="submit" name="direction" value="-">
+            <input type="submit" name="direction" value="+">
+            <input type="hidden" value="{{employee.id}}" name="employee_id">
+        </form>
     </div>
-
 </br>
-</br>
-</br>
-<a href="/"><img src="{% static "images/red.png" %}"></a>
-<a href="/"><img src="{% static "images/green.png" %}"></a>
+    <div>
+        <form method="POST" action="/">
+            {% csrf_token %}
+            <h3>Отобразить сведения о:</h3>
+            <input type="submit" name="table" value="property">
+            <input type="submit" name="table" value="promotions">
+            <input type="submit" name="table" value="relatives">
+            <input type="submit" name="table" value="auto">
+            <input type="submit" name="table" value="vaccination">
+            <input type="submit" name="table" value="education">
+        </form>
+    </div>
 {% endblock content %}
-

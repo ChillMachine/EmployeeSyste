@@ -9,13 +9,23 @@ def index(request):
     
     return render(request, "index.html", {'data':employees})
 
-# def person(request):
-#     id = request.POST.get('id', '0')
-#     data = {'id': id}
-#     if id == '0':
-#         return render(request, "index.html", {'text':'Пользователь не найден'})
-#     else:
-#         return render(request, "person.html", context=data)
+def person(request):
+    employees = Employee.objects.all()
+    employee_id = request.POST.get('employee_id')
+    direction = request.POST.get('direction', None)
+    if direction == '+':
+        employee_id = str(int(employee_id) + 1)
+    elif direction == '-':
+        employee_id = str(int(employee_id) - 1)
+
+    if int(employee_id) < 1:
+        employee_id = str(len(employees))
+    elif int(employee_id) > len(employees):
+        employee_id = '1'
+
+    employee = Employee.objects.get(id=employee_id)
+    return render(request, "person.html", context={'employee':employee})
+
     
 
 def add_person(request):

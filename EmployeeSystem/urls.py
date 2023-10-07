@@ -20,7 +20,7 @@ from main import views
  
 urlpatterns = [
     path("", views.index),
-    # re_path(r'person', views.person),
+    path('person', views.person),
     path('add_person', views.add_person),
     
     
