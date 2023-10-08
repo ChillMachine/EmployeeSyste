@@ -73,6 +73,7 @@ table {
 }
 
 table th, table td {
+  color: #88BDBC;
   padding: 8px;
   text-align: left;
 }

@@ -3,17 +3,15 @@ from .models import Rank, Post
 
 ranks = [(rank.id, rank.rank_name) for rank in Rank.objects.all()]
 posts = [(post.id, post.post_name) for post in Post.objects.all()]
+groups = [(x, f'Группа №{x}') for x in range(1,6)]
 
 class EmployeeForm(forms.Form):
-    name = forms.CharField(label='Имя')
     second_name = forms.CharField(label='Фамилия')
+    name = forms.CharField(label='Имя')
     third_name = forms.CharField(label='Отчество')
     rank = forms.ChoiceField(choices=ranks, label='Звание')
     post = forms.ChoiceField(choices=posts, label='Должность')
-
-    # rank = forms.IntegerField(label='Звание')
-    # post = forms.IntegerField(label='Должность')
-    group = forms.CharField(label='Группа')
+    group = forms.ChoiceField(choices=groups, label='Группа')
     appointment_order_num = forms.CharField(label='Приказ о назначении на должность')
     appointment_order_date = forms.DateField(label='Дата приказа', widget=forms.SelectDateWidget)
     b_day = forms.DateField(label='Дата рождения', widget=forms.SelectDateWidget)
