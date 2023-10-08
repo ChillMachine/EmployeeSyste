@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .my_forms import EmployeeForm
-from .models import Employee
+from .models import Employee, Rank, Post
 from datetime import date
  
 def index(request):	
@@ -38,8 +38,8 @@ def add_person(request):
         employee = Employee.objects.create(name = data['name'], 
                                            second_name = data['second_name'],
                                            third_name = data['third_name'],
-                                           rank = data['rank'],
-                                           post = data['post'],
+                                           rank = Rank.objects.get(id=int(data['rank'])),
+                                           post = Post.objects.get(id=int(data['post'])),
                                            b_day = date(int(data['b_day_year']), int(data['b_day_month']), int(data['b_day_day'])),
                                            personal_num = data['personal_num'],
                                            phone_number = data['phone_number'],
