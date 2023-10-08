@@ -45,9 +45,10 @@ header {
 
 button {
   background-color: #88BDBC;
-  color: white;
+  color: rgb(0, 0, 0);
   border-radius: 10px;
   padding: 10px 20px;
+  tex
 }
 
 footer {
