@@ -15,7 +15,7 @@ class EmployeeForm(forms.Form):
     appointment_order_num = forms.CharField(label='Приказ о назначении на должность')
     appointment_order_date = forms.DateField(label='Дата приказа', widget=forms.SelectDateWidget)
     b_day = forms.DateField(label='Дата рождения', widget=forms.SelectDateWidget)
-    phone_number = forms.CharField(label='Номер телефона')
+    phone_number = forms.RegexField('^(?:\+7|8)[0-9]{10}$',label='Номер телефона')
     family_status = forms.CharField(label='Семейное положение')
     place_of_bd = forms.CharField(label='Место рождения')
     personal_num = forms.CharField(label='Личный номер')

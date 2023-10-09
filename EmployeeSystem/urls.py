@@ -22,6 +22,6 @@ urlpatterns = [
     path("", views.index),
     path('person', views.person),
     path('add_person', views.add_person),
-    
+    path('information_table', views.information)
     
 ]

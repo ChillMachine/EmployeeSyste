@@ -37,22 +37,26 @@
     <div>
         <form method="POST" action="/person">
             {%csrf_token%}
-            <input type="submit" name="direction" value="-">
-            <input type="submit" name="direction" value="+">
+            <input style="content: Предыдущий сотрудник;" type="submit" name="direction" value="-" >
+            <input style="content: Следующий сотрудник;" type="submit" name="direction" value="+">
             <input type="hidden" value="{{employee.id}}" name="employee_id">
         </form>
     </div>
 </br>
     <div>
-        <form method="POST" action="/">
+        <form method="POST" action="information_table" id="form">
             {% csrf_token %}
             <h3>Отобразить сведения о:</h3>
-            <input type="submit" name="table" value="property">
-            <input type="submit" name="table" value="promotions">
-            <input type="submit" name="table" value="relatives">
-            <input type="submit" name="table" value="auto">
-            <input type="submit" name="table" value="vaccination">
-            <input type="submit" name="table" value="education">
+            <select name="table" form="form">
+                <option value="property">Имущество</option>
+                <option value="promotions">Поощрения</option>
+                <option value="relatives">Члены семьи</option>
+                <option value="auto">Личные автомобили</option>
+                <option value="vaccination">Вакцинация</option>
+                <option value="education">Образование</option>
+            </select>
+            <input name="employee_id" type="hidden" value='{{employee.id}}'>
+            <input type="submit">
         </form>
     </div>
 {% endblock content %}

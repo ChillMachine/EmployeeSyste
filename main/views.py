@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .my_forms import EmployeeForm
 from .models import Employee, Rank, Post
 from datetime import date
+
+table_names = {'property':'имущество','promotions':'поощрения', 'relatives':'члены семьи', 'auto':'личные автомобили','vaccination':'вакцинация','education':'образование'}
  
 def index(request):	
     employees = Employee.objects.all()
@@ -25,8 +27,6 @@ def person(request):
 
     employee = Employee.objects.get(id=employee_id)
     return render(request, "person.html", context={'employee':employee})
-
-    
 
 def add_person(request):
     employee_form = EmployeeForm()
@@ -55,4 +55,8 @@ def add_person(request):
         return render(request, "index.html", {'text':'Error'})
     
 
- 
+def information(request):
+    employee_id = request.POST.get('employee_id')
+    employee = Employee.objects.get(id=employee_id)
+    table = request.POST.get('table')
+    return render(request, "information_table.html", context={'employee':employee_id, 'table_name':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table]}'})
