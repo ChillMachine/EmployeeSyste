@@ -49,9 +49,10 @@ footer {
 }
 
 main {
-  padding: 20px;
+  padding: 10%;
   margin-top: 60px;
   margin-bottom: 60px; 
+  overflow-y: auto;
 }
 
 table {

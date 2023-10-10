@@ -6,14 +6,16 @@
     <div>
         <table id ='my_table'>
             <tr>
-                <th onclick="sortTable(0)">ФИО</th>
-                <th onclick="sortTable(1)">Звание</th>
-                <th onclick="sortTable(2)">Должность</th>
-                <th onclick="sortTable(3)">Группа</th>
+                <th onclick="sortTable(0)">№</th>
+                <th onclick="sortTable(1)">ФИО</th>
+                <th onclick="sortTable(2)">Звание</th>
+                <th onclick="sortTable(3)">Должность</th>
+                <th onclick="sortTable(4)">Группа</th>
                 
             </tr>
           {%for employee in data%}
             <tr>
+                <td>{{employee.id}}</td>
                 <td>
                     <form action='person' method='POST'>
                         {% csrf_token %}

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Сотрудник {{id}}{% endblock title %}
-{% block header %}Сотрудник {{id}}{% endblock header %}
+{% block title %}Сотрудник {{employee.id}}{% endblock title %}
+{% block header %}Сотрудник {{employee.id}}{% endblock header %}
 {% block content %}
 {% load static %}
 <h2>{{text}}</h2>
-<h1>{{employee.name}} {{employee.second_name}} {{employee.third_name}}</h1>
+<h1>{{employee.second_name}} {{employee.name}} {{employee.third_name}}</h1>
 <table>
     <tr>
         <th>Звание</th>
@@ -22,7 +22,7 @@
     <tr>
         <td>{{employee.rank.rank_name}}</td>
         <td>{{employee.post.post_name}}</td>
-        <td>{{employee.group}}</td>
+        <td>{{employee.group_num}}</td>
         <td>{{employee.appointment_order_num}}</td>
         <td>{{employee.appointment_order_date}}</td>
         <td>{{employee.personal_num}}</td>
