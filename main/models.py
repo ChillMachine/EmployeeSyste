@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 class Rank(models.Model):
     rank_name = models.CharField(max_length=20)
@@ -36,6 +37,7 @@ class Promotions(models.Model):
     promotion_type = models.CharField(max_length=20)
     rights = models.CharField(max_length=20)
     date = models.DateField()
+    order_num = models.CharField(max_length=10, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Property(models.Model):
@@ -51,7 +53,7 @@ class Relatives(models.Model):
     second_name = models.CharField(max_length=20)
     third_name = models.CharField(max_length=20) 
     relation_degree = models.CharField(max_length=20)
-    phone_number = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=12, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Training(models.Model):
@@ -59,12 +61,16 @@ class Training(models.Model):
     institution = models.CharField(max_length=20)
     start_date = models.DateField()
     duratin = models.CharField(max_length=10)
+    description = models.CharField(max_length=50, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Weapons(models.Model):
     weapon_name = models.CharField(max_length=20)
     count = models.IntegerField()
     weapon_num = models.CharField(max_length=20)
+    rec_date = models.DateField(blank=True, null=True)
+    description = models.CharField(max_length=50, default='-')
+    status = models.CharField(max_length=20, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Vaccination(models.Model):
@@ -77,6 +83,7 @@ class Education(models.Model):
     grade = models.CharField(max_length=20)
     institution = models.CharField(max_length=20)
     date_of_graduate = models.DateField()
+    speciality = models.CharField(max_length=20, default='-')
     description = models.CharField(max_length=50)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 

@@ -4,7 +4,16 @@ from .my_forms import EmployeeForm
 from .models import Employee, Rank, Post
 from datetime import date
 
-table_names = {'property':'имущество','promotions':'поощрения', 'relatives':'члены семьи', 'auto':'личные автомобили','vaccination':'вакцинация','education':'образование'}
+table_names = {'Property':'имущество',
+               'Promotions':'поощрения', 
+               'Relatives':'члены семьи', 
+               'Auto':'личные автомобили',
+               'Vaccination':'вакцинация',
+               'Education':'образование',
+               'Training':'переподготовка',
+               'Weapons':'закрепленное оружие',
+               'Driver_license':'категории водительского удостоверения',
+               'Clothing_sizes':'размеры одежды'}
  
 def index(request):	
     employees = Employee.objects.all()
@@ -59,4 +68,4 @@ def information(request):
     employee_id = request.POST.get('employee_id')
     employee = Employee.objects.get(id=employee_id)
     table = request.POST.get('table')
-    return render(request, "information_table.html", context={'employee':employee_id, 'table_name':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table]}'})
+    return render(request, "information_table.html", context={'table': table, 'employee':employee_id, 'table_name':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table]}'})

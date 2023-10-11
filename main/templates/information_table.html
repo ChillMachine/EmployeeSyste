@@ -3,6 +3,213 @@
 {% block header %}{{table_name}}{% endblock header %}
 {% block content %}
     {{text}}
-    
+{% comment %}Property  {% endcomment %}
+{%if table == "Property"%}
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>Название</th>
+        <th>Инвентарный номер</th>
+        <th>Дата получения</th>
+        <th>Отмета о сдаче</th>
+        <th>Примечание</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Promotions  {% endcomment %}
+{%if table == "Promotions"%}
+
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>Тип поощрения/взыскания</th>
+        <th>Чьими правами</th>
+        <th>Дата приказа</th>
+        <th>Номер приказа</th>
+        <th>Примечание</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Relatives  {% endcomment %}
+{%if table == "Relatives"%}
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>ФИО</th>
+        <th>Степень родства</th>
+        <th>Номер телефона</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Auto  {% endcomment %}
+{%if table == "Auto"%}
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>Модель</th>
+        <th>Гос.регистрационный номер</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Vaccination  {% endcomment %}
+{%if table == "Vaccination"%}
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>Название</th>
+        <th>Дата вакцинации</th>
+        <th>Примечание</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Education  {% endcomment %}
+{%if table == "Education"%}
+
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>Степень</th>
+        <th>Учебное заведение</th>
+        <th>Дата выпуска</th>
+        <th>Специальность</th>
+        <th>Примечание</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Training  {% endcomment %}
+{%if table == "Training"%}
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>Код потока</th>
+        <th>Учебное заведение</th>
+        <th>Дата начала обучения</th>
+        <th>Продолжительность</th>
+        <th>Примечание</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Weapons  {% endcomment %}
+{%if table == "Weapons"%}
+<table>
+    <tr>
+        <th>№ п/п</th>
+        <th>Название</th>
+        <th>Количество</th>
+        <th>Номер</th>
+        <th>Дата получения</th>
+        <th>Отметка о сдаче</th>
+        <th>Примечание</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Driver_license  {% endcomment %}
+{%if table == "Driver_license"%}
+<table>
+    <tr>
+        <th>A</th><td></td>
+    </tr>
+    <tr>
+        <th>B</th><td></td>
+    </tr>
+    <tr>
+        <th>BE</th><td></td>
+    </tr>
+    <tr>
+        <th>C</th><td></td>
+    </tr>
+    <tr>
+        <th>CE</th><td></td>
+    </tr>
+    <tr>
+        <th>D</th><td></td>
+    </tr>
+    <tr>
+        <th>DE</th><td></td>
+    </tr>
+</table>
+{% endif %}
+
+{% comment %}Clothing_sizes  {% endcomment %}
+{%if table == "Clothing_sizes"%}
+<table>
+    <tr>
+        <th>Размер головного убора</th><td></td>
+    </tr>
+    <tr>
+        <th>Размер обуви</th><td></td>
+    </tr>
+    <tr>
+        <th>Размер одежды</th><td></td>
+    </tr>
+</table>
+{% endif %}
+
+
         
 {% endblock content %}
