@@ -4,31 +4,30 @@
 {% block content %}
     {{text}}
     <div>
-        <table id ='my_table'>
-            <tr>
-                <th onclick="sortTable(0)">№</th>
-                <th onclick="sortTable(1)">ФИО</th>
-                <th onclick="sortTable(2)">Звание</th>
-                <th onclick="sortTable(3)">Должность</th>
-                <th onclick="sortTable(4)">Группа</th>
-                
-            </tr>
-          {%for employee in data%}
-            <tr>
-                <td>{{employee.id}}</td>
-                <td>
-                    <form action='person' method='POST'>
-                        {% csrf_token %}
-                        <button name='employee_id' value="{{employee.id}}">
-                            {{employee.second_name}} {{employee.name}} {{employee.third_name}}
-                        </button>
-                    </form>
-                </td>
-                <td>{{employee.rank.rank_name}}</td>
-                <td>{{employee.post.post_name}}</td>
-                <td>{{employee.group_num}}</td>
-            </tr>
-          {% endfor %}
+        <table id ='my_table' class="resizable">
+                <tr>
+                    <th onclick="sortNumberColumn(0)">№</th>
+                    <th onclick="sortStringColumn(1)">ФИО</th>
+                    <th onclick="sortStringColumn(2)">Звание</th>
+                    <th onclick="sortStringColumn(3)">Должность</th>
+                    <th onclick="sortStringColumn(4)">Группа</th>
+                </tr>
+                {%for employee in data%} 
+                <tr>
+                    <td>{{employee.id}}</td>
+                    <td>
+                        <form action='person' method='POST'>
+                            {% csrf_token %}
+                            <button name='employee_id' value="{{employee.id}}">
+                                {{employee.second_name}} {{employee.name}} {{employee.third_name}}
+                            </button>
+                        </form>
+                    </td>
+                    <td>{{employee.rank.rank_name}}</td>
+                    <td>{{employee.post.post_name}}</td>
+                    <td>{{employee.group_num}}</td>
+                </tr>
+                {% endfor %}
         </table>
     </div>
 {% endblock content %}

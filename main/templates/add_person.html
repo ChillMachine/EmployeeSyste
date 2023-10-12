@@ -2,11 +2,6 @@
 {% block title %}Добавить пользователя{% endblock title %}
 {% block header %}Добавить пользователя{% endblock header %}
 {% block content %}
-</br>
-</br>
-</br>
-<h2><div>{{text}}</div></h2>
-
 <form method="POST", action="/add_person">
     {% csrf_token %}
     <table>

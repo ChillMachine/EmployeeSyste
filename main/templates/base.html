@@ -10,17 +10,17 @@
     </head>
 <body>
     <header>
-        <h1>{% block header %}{% endblock header %}</h1>
+        <h1 style="margin-bottom: 5px;">{% block header %}{% endblock header %}</h1>
         <nav>
-            <ul>
-                <li><a href="/">Главная</a></li>
-                <li><a href="/add_person">Добавить сотрудника</a></li>
+            <div class="button-container"><form action="/"><button>Главная</button></form><form action="/add_person"><button>Добавить сотрудника</button></form></div>
             </ul>
         </nav>
     </header>
 
     <main>
+        <div>
         {% block content%}{% endblock content %}
+        </div>
     </main>
 
     {% comment %} <footer>

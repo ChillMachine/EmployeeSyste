@@ -4,19 +4,19 @@
 {% block content %}
 {% load static %}
 <h1>{{employee.second_name}} {{employee.name}} {{employee.third_name}}</h1>
-<table>
+<table style="width: 100%;">
     <tr>
         <th>Звание</th>
         <th>Должность</th>
         <th>Группа</th>
-        <th>Номер приказа о назначении на должность</th>
+        <th>№ приказа о назначении</th>
         <th>Дата приказа</th>
         <th>Личный номер</th>
         <th>Дата Рождения</th>
         <th>Место рождения</th>
         <th>Семейное положение</th>
         <th>Номер телефона</th>
-        <th>Адрес места жительства</th>
+        <th style="width: 20%;">Адрес места жительства</th>
     </tr>
     <tr>
         <td>{{employee.rank.rank_name}}</td>
@@ -33,11 +33,17 @@
     </tr>
 </table>
 </br>
-    <div>
+    <div class="button-container">
         <form method="POST" action="/person">
             {%csrf_token%}
-            <input style="content: Предыдущий сотрудник;" type="submit" name="direction" value="-" >
-            <input style="content: Следующий сотрудник;" type="submit" name="direction" value="+">
+            <input type="submit" name="direction" value="Предыдущий сотрудник" >
+            <input type="hidden" value="-" name="direction">
+            <input type="hidden" value="{{employee.id}}" name="employee_id">
+        </form>
+        <form method="POST" action="/person">
+            {%csrf_token%}
+            <input type="submit" name="direction" value="Следующий сотрудник" >
+            <input type="hidden" value="+" name="direction">
             <input type="hidden" value="{{employee.id}}" name="employee_id">
         </form>
     </div>
@@ -59,8 +65,10 @@
                 <option value="Clothing_sizes">Размеры одежды</option>
 
             </select>
-            <input name="employee_id" type="hidden" value='{{employee.id}}'>
-            <input type="submit">
+            <div class="button-container">
+                <input name="employee_id" type="hidden" value='{{employee.id}}'>
+                <button type="button"  style="width: auto;margin-left: 10px;">Отобразить</button>
+            </div>
         </form>
     </div>
 {% endblock content %}
