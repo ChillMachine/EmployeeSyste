@@ -1,155 +1,197 @@
 {% extends "base.html" %}
-{% block title %}{{table_name}}{% endblock title %}
-{% block header %}{{table_name}}{% endblock header %}
+{% block title %}{{title}}{% endblock title %}
+{% block header %}{{title}}{% endblock header %}
 {% block content %}
-    {{text}}
-{% comment %}Property  {% endcomment %}
-{%if table == "Property"%}
+
+<form method="POST" action="information_table">
+{% csrf_token %}   
+{% comment %}Property  +++++++++++++++++++{% endcomment %}
+{%if table_name == "Property"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>Название</th>
         <th>Инвентарный номер</th>
         <th>Дата получения</th>
         <th>Отмета о сдаче</th>
         <th>Примечание</th>
     </tr>
+    {%for property in table %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{property.name}}</td>
+        <td>{{property.inv_num}}</td>
+        <td>{{property.date_of_rec}}</td>
+        <td>{{property.status}}</td>
+        <td>{{property.description}}</td>
+    </tr>
+    {%endfor%}
+    <tr>
+        <td><input required name="name"></td>
+        <td><input required name="inv_num"></td>
+        <td><input required name="date_of_rec" type="date"></td>
+        <td><input required name="status"></td>
+        <td><input required name="description"></td>
     </tr>
 </table>
 {% endif %}
 
-{% comment %}Promotions  {% endcomment %}
-{%if table == "Promotions"%}
 
+{% comment %}Promotions  ++++++++++++++++++{% endcomment %}
+{%if table_name == "Promotions"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>Тип поощрения/взыскания</th>
         <th>Чьими правами</th>
         <th>Дата приказа</th>
         <th>Номер приказа</th>
         <th>Примечание</th>
     </tr>
+    {% for promotion in table %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{promotion.promotion_type}}</td>
+        <td>{{promotion.rights}}</td>
+        <td>{{promotion.date}}</td>
+        <td>{{promotion.order_num}}</td>
+        <td>{{promotion.description}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><input required name='promotion_type'></td>
+        <td><input required name='rights'></td>
+        <td><input type="date" required name='date'></td>
+        <td><input required name='order_num'></td>
+        <td><input required name='description'></td>
     </tr>
 </table>
 {% endif %}
 
-{% comment %}Relatives  {% endcomment %}
-{%if table == "Relatives"%}
+{% comment %}Relatives  +++++++++++++++++{% endcomment %}
+{%if table_name == "Relatives"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>ФИО</th>
         <th>Степень родства</th>
         <th>Номер телефона</th>
     </tr>
+    {% for relative in table %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{relative.second_name}} {{relative.name}} {{relative.third_name}}</td>
+        <td>{{relative.relation_degree}}</td>
+        <td>{{relative.phone_number}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><input required name='FIO'></td>
+        <td><input required name='relation_degree'></td>
+        <td><input required name='phone_number'></td>
     </tr>
 </table>
 {% endif %}
 
-{% comment %}Auto  {% endcomment %}
-{%if table == "Auto"%}
+{% comment %}Auto  ++++++++++++++++++++{% endcomment %}
+{%if table_name == "Auto"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>Модель</th>
         <th>Гос.регистрационный номер</th>
     </tr>
+    {% for auto in table %}
+        <tr>
+            <td>{{auto.model}}</td>
+            <td>{{auto.gos_num}}</td>
+        </tr>
+    {% endfor %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><input required name='model'></td>
+        <td><input required name='gos_num'></td>
     </tr>
 </table>
 {% endif %}
 
-{% comment %}Vaccination  {% endcomment %}
-{%if table == "Vaccination"%}
+{% comment %}Vaccination  +++++++++++++++{% endcomment %}
+{%if table_name == "Vaccination"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>Название</th>
         <th>Дата вакцинации</th>
         <th>Примечание</th>
     </tr>
+    {% for vaccine in table %}
+        <tr>
+            <td>{{vaccine.vaccine_name}}</td>
+            <td>{{vaccine.date}}</td>
+            <td>{{vaccine.description}}</td>
+        </tr>
+    {% endfor %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><input required name='vaccine_name'></td>
+        <td><input type='date' required name='date'></td>
+        <td><input required name='description'></td>
     </tr>
 </table>
 {% endif %}
 
-{% comment %}Education  {% endcomment %}
-{%if table == "Education"%}
-
+{% comment %}Education  ++++++++++++++++{% endcomment %}
+{%if table_name == "Education"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>Степень</th>
         <th>Учебное заведение</th>
         <th>Дата выпуска</th>
         <th>Специальность</th>
         <th>Примечание</th>
     </tr>
+    {% for educ in table %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{educ.grade}}</td>
+        <td>{{educ.institution}}</td>
+        <td>{{educ.date_of_graduate}}</td>
+        <td>{{educ.speciality}}</td>
+        <td>{{educ.description}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><input required name='grade'></td>
+        <td><input required name='institution'></td>
+        <td><input type='date' required name='date_of_graduate'></td>
+        <td><input required name='speciality'></td>
+        <td><input required name='description'></td>
     </tr>
 </table>
 {% endif %}
 
-{% comment %}Training  {% endcomment %}
-{%if table == "Training"%}
+{% comment %}Training  +++++++++++++++{% endcomment %}
+{%if table_name == "Training"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>Код потока</th>
         <th>Учебное заведение</th>
         <th>Дата начала обучения</th>
         <th>Продолжительность</th>
         <th>Примечание</th>
     </tr>
+    {% for train in table %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{train.thread_code}}</td>
+        <td>{{train.institution}}</td>
+        <td>{{train.start_date}}</td>
+        <td>{{train.duratin}}</td>
+        <td>{{train.description}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><input required name='thread_code'></td>
+        <td><input required name='institution'></td>
+        <td><input type='date' required name='start_date'></td>
+        <td><input required name='duratin'></td>
+        <td><input required name='description'></td>
     </tr>
 </table>
 {% endif %}
 
-{% comment %}Weapons  {% endcomment %}
-{%if table == "Weapons"%}
+{% comment %}Weapons  ++++++++++++++++++++++{% endcomment %}
+{%if table_name == "Weapons"%}
 <table>
     <tr>
-        <th>№ п/п</th>
         <th>Название</th>
         <th>Количество</th>
         <th>Номер</th>
@@ -157,19 +199,32 @@
         <th>Отметка о сдаче</th>
         <th>Примечание</th>
     </tr>
+
+    {% for weapon in table %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{weapon.weapon_name}}</td>
+        <td>{{weapon.count}}</td>
+        <td>{{weapon.weapon_num}}</td>
+        <td>{{weapon.rec_date}}</td>
+        <td>{{weapon.status}}</td>
+        <td>{{weapon.description}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><input required name="weapon_name"></td>
+        <td><input required name="count" type="number"></td>
+        <td><input required name="weapon_num"></td>
+        <td><input required name="rec_date" type="date"></td>
+        <td><input required name="status"></td>
+        <td><input required name="description"></td>
     </tr>
 </table>
+
+
 {% endif %}
 
 {% comment %}Driver_license  {% endcomment %}
-{%if table == "Driver_license"%}
+{%if table_name == "Driver_license"%}
 <table>
     <tr>
         <th>A</th><td></td>
@@ -196,7 +251,7 @@
 {% endif %}
 
 {% comment %}Clothing_sizes  {% endcomment %}
-{%if table == "Clothing_sizes"%}
+{%if table_name == "Clothing_sizes"%}
 <table>
     <tr>
         <th>Размер головного убора</th><td></td>
@@ -209,7 +264,12 @@
     </tr>
 </table>
 {% endif %}
-
-
-        
+<button type='submit' value='True' name='filling'>Добавить запись</button>
+<input type="hidden" name="table_name" value="{{table_name}}">
+<input type="hidden" name="employee_id" value="{{employee_id}}">
+</form>
+<form method="POST" action="person">
+    {% csrf_token %}
+    <button name='employee_id' value="{{employee_id}}">Вернуться к сотруднику</button>
+</form>      
 {% endblock content %}

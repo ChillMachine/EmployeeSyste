@@ -39,6 +39,7 @@ class Promotions(models.Model):
     date = models.DateField()
     order_num = models.CharField(max_length=10, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    description = models.CharField(max_length=50, default='-')
 
 class Property(models.Model):
     name = models.CharField(max_length=20)
@@ -68,7 +69,7 @@ class Weapons(models.Model):
     weapon_name = models.CharField(max_length=20)
     count = models.IntegerField()
     weapon_num = models.CharField(max_length=20)
-    rec_date = models.DateField(blank=True, null=True)
+    rec_date = models.DateField()
     description = models.CharField(max_length=50, default='-')
     status = models.CharField(max_length=20, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)

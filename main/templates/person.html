@@ -48,27 +48,25 @@
         </form>
     </div>
 </br>
-    <div>
-        <form method="POST" action="information_table" id="form">
-            {% csrf_token %}
-            <h3>Отобразить сведения о:</h3>
-            <select name="table" form="form">
-                <option value="Property">Закрепленное имущество</option>
-                <option value="Promotions">Поощрения</option>
-                <option value="Relatives">Члены семьи</option>
-                <option value="Auto">Личные автомобили</option>
-                <option value="Vaccination">Вакцинация</option>
-                <option value="Education">Образование</option>
-                <option value="Training">Переподготовка</option>
-                <option value="Weapons">Закрепленное оружие</option>
-                <option value="Driver_license">Категории водительского удостоверения</option>
-                <option value="Clothing_sizes">Размеры одежды</option>
+    <div class="button-container">
 
-            </select>
-            <div class="button-container">
+        <div class="button-container">
+            <form method="POST" action="information_table">
+                {% csrf_token %}
+                <h3>Отобразить сведения о:</h3>
+                <button name='table_name' value="Property">Закрепленное имущество</button>
+                <button name='table_name' value="Promotions">Поощрения</button>
+                <button name='table_name' value="Relatives">Члены семьи</button>
+                <button name='table_name' value="Auto">Личные автомобили</button>
+                <button name='table_name' value="Vaccination">Вакцинация</button>
+                <button name='table_name' value="Education">Образование</button>
+                <button name='table_name' value="Training">Переподготовка</button>
+                <button name='table_name' value="Weapons">Закрепленное оружие</button>
+                <button name='table_name' value="Driver_license">Категории водительского удостоверения</button>
+                <button name='table_name' value="Clothing_sizes">Размеры одежды</button>
                 <input name="employee_id" type="hidden" value='{{employee.id}}'>
-                <button type="button"  style="width: auto;margin-left: 10px;">Отобразить</button>
-            </div>
-        </form>
+            </form>
+        </div>
+        
     </div>
 {% endblock content %}

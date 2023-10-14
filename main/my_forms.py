@@ -20,4 +20,3 @@ class EmployeeForm(forms.Form):
     place_of_bd = forms.CharField(label='Место рождения')
     personal_num = forms.CharField(label='Личный номер')
     address = forms.CharField(label='Адрес места жительства')
-    

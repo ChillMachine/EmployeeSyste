@@ -94,7 +94,7 @@ button, input {
   color: rgb(0, 0, 0);
   border-radius: 10px;
   padding: 10px 20px;
-  width: 100%;
+  font-weight: bold;
 }
 
 select{
@@ -109,9 +109,7 @@ button:hover {
   color: #88BDBC;
 }
 
-input{
-  width: 100%;
-}
+
 
 header button {
   width: auto;
@@ -121,4 +119,12 @@ header button {
 
 .button-container {
   display: flex; 
+}
+
+td input{
+  width: 80%;
+}
+
+td button{
+  width: 100%;
 }
