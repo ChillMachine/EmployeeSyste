@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .my_forms import EmployeeForm
-from .models import Employee, Rank, Post, Auto, Promotions, Property, Relatives, Training, Weapons, Vaccination, Education, Driver_license, Clothing_sizes
+from .my_forms import *
+from .models import *
 from datetime import date
 
 table_names = {'Property':'имущество',
@@ -54,7 +54,6 @@ def add_person(request):
     if request.method == 'GET': return render(request, 'add_person.html', {"form": employee_form})
     elif request.method == 'POST':
         data = request.POST
-        
         employee = Employee.objects.create(name = data['name'], 
                                            second_name = data['second_name'],
                                            third_name = data['third_name'],
@@ -80,75 +79,32 @@ def information(request):
     employee_id = data['employee_id']
     employee = Employee.objects.get(id=employee_id)
     if data.get('filling', 'False') == 'True':
-        if data['table_name'] == 'Property':
-            prop = Property.objects.create(name = data['name'],
-                                           inv_num = data['inv_num'],
-                                           date_of_rec = data['date_of_rec'],
-                                           description = data['description'],
-                                           status = data['status'],
-                                           employee_id = Employee.objects.get(id=int(employee_id)))
-            prop.save()
-        elif data['table_name'] == 'Promotions':
-            promotion = Promotions.objects.create(promotion_type=data['promotion_type'],
-                                                  rights=data['rights'],
-                                                  date=data['date'],
-                                                  order_num=data['order_num'],
-                                                  description=data['description'],
-                                                  employee_id=Employee.objects.get(id=int(employee_id)))
-            promotion.save()  
-        elif data['table_name'] == 'Relatives':
-            second_name, name, third_name = data['FIO'].split()
-            relative = Relatives.objects.create(name=name,
-                                                second_name=second_name,
-                                                third_name=third_name,
-                                                relation_degree=data['relation_degree'],
-                                                phone_number=data['phone_number'],
-                                                employee_id=Employee.objects.get(id=int(employee_id)))
-            relative.save()
-        elif data['table_name'] == 'Auto':
-            auto = Auto.objects.create(model=data['model'],
-                                       gos_num=data['gos_num'],
-                                       employee_id=Employee.objects.get(id=int(employee_id)))
-            auto.save()
-        elif data['table_name'] == 'Vaccination':
-            vaccine = Vaccination.objects.create(vaccine_name=data['vaccine_name'],
-                                                 date=data['date'],
-                                                 description=data['description'],
-                                                 employee_id=Employee.objects.get(id=int(employee_id)))
-            vaccine.save()
-        elif data['table_name'] == 'Education':
-            education = Education.objects.create(grade=data['grade'],
-                                                 institution=data['institution'],
-                                                 date_of_graduate=data['date_of_graduate'],
-                                                 speciality=data['speciality'],
-                                                 description=data['description'],
-                                                 employee_id=Employee.objects.get(id=int(employee_id)))
-            education.save()
-        elif data['table_name'] == 'Training':
-            training = Training.objects.create(thread_code=data['thread_code'],
-                                               institution=data['institution'],
-                                               start_date=data['start_date'],
-                                               duratin=data['duratin'],
-                                               description=data['description'],
-                                               employee_id=Employee.objects.get(id=int(employee_id)))
-            training.save()
-        elif data['table_name'] == 'Weapons':
-            weapon = Weapons.objects.create(weapon_name=data['weapon_name'],
-                                            count=data['count'],
-                                            weapon_num=data['weapon_num'],
-                                            rec_date=data['rec_date'],
-                                            description=data['description'],
-                                            status=data['status'],
-                                            employee_id=Employee.objects.get(id=int(employee_id)))
-            weapon.save()
-        elif data['table_name'] == 'Driver_license':
-            pass
-        elif data['table_name'] == 'Clothing_sizes':
-            pass
+        if data['table_name'] == 'Property': PropertyForm(data).save()
+        elif data['table_name'] == 'Promotions': PromotionsForm(data).save()
+        elif data['table_name'] == 'Relatives': RelativesForm(data).save()
+        elif data['table_name'] == 'Auto': AutoForm(data).save()
+        elif data['table_name'] == 'Vaccination': VaccinationForm(data).save()
+        elif data['table_name'] == 'Education': EducationForm(data).save()
+        elif data['table_name'] == 'Training': TrainingForm(data).save()
+        elif data['table_name'] == 'Weapons': WeaponsForm(data).save()
         
     table_name = data['table_name']
     table = tables[table_name].objects.filter(employee_id=employee_id)
-    return render(request, "information_table.html", context={'table': table , 
-                                                              'table_name': table_name, 
-                                                              'employee_id':employee_id,
-                                                              'title':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table_name]}'})
+    property_form, promotions_form, relatives_form = PropertyForm(), PromotionsForm(), RelativesForm()
+    auto_form, vaccination_form, education_form = AutoForm(), VaccinationForm(), EducationForm()
+    training_form, weapons_form = TrainingForm(), WeaponsForm()
+
+    context = {'table': table ,
+               'table_name': table_name,
+               'employee_id':employee_id,
+               'title':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table_name]}',
+               'property_form': property_form,
+               'promotions_form': promotions_form,
+               'relatives_form': relatives_form,
+               'auto_form': auto_form,
+               'vaccination_form': vaccination_form,
+               'education_form': education_form,
+               'training_form': training_form,
+               'weapons_form': weapons_form}
+    
+    return render(request, "information_table.html", context)
