@@ -22,12 +22,18 @@ class AutoForm(ModelForm):
 class PromotionsForm(ModelForm):
     class Meta:
         model = Promotions
-        fields = "__all__"       
+        fields = "__all__"
+        widgets = {
+            'date': forms.DateInput()
+        }       
 
 class PropertyForm(ModelForm):
     class Meta:
         model = Property
         fields = "__all__"
+        widgets = {
+            'date_of_rec': forms.DateInput()
+        } 
 
 class RelativesForm(ModelForm):
     class Meta:

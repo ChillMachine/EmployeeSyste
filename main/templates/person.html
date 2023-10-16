@@ -48,7 +48,6 @@
         </form>
     </div>
 </br>
-    <div class="button-container">
 
         <div class="button-container">
             <form method="POST" action="information_table">
@@ -62,11 +61,45 @@
                 <button name='table_name' value="Education">Образование</button>
                 <button name='table_name' value="Training">Переподготовка</button>
                 <button name='table_name' value="Weapons">Закрепленное оружие</button>
-                <button name='table_name' value="Driver_license">Категории водительского удостоверения</button>
-                <button name='table_name' value="Clothing_sizes">Размеры одежды</button>
+                <!-- <button name='table_name' value="Driver_license">Категории водительского удостоверения</button>
+                <button name='table_name' value="Clothing_sizes">Размеры одежды</button> -->
                 <input name="employee_id" type="hidden" value='{{employee.id}}'>
             </form>
         </div>
-        
-    </div>
+<h3>Дополнительная информация</h3>
+<table>
+    <tr>
+        <th>A</th><td>{{driver_license.A}}</td>
+    </tr>
+    <tr>
+        <th>B</th><td>{{driver_license.B}}</td>
+    </tr>
+    <tr>
+        <th>BE</th><td>{{driver_license.BE}}</td>
+    </tr>
+    <tr>
+        <th>C</th><td>{{driver_license.C}}</td>
+    </tr>
+    <tr>
+        <th>CE</th><td>{{driver_license.CE}}</td>
+    </tr>
+    <tr>
+        <th>D</th><td>{{driver_license.D}}</td>
+    </tr>
+    <tr>
+        <th>DE</th><td>{{driver_license.DE}}</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>Размер головного убора</th><td>{{sizes.head_size}}</td>
+    </tr>
+    <tr>
+        <th>Размер обуви</th><td>{{sizes.shoes_size}}</td>
+    </tr>
+    <tr>
+        <th>Размер одежды</th><td>{{sizes.cloth_size}}</td>
+    </tr>
+</table>
+
 {% endblock content %}

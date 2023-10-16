@@ -26,6 +26,11 @@ tables = {  'Property':Property,
             'Clothing_sizes': Clothing_sizes}
 
 
+def sample_view(request):
+    html = '<body><h1>Django sample_view</h1><br><p>Отладка sample_view</p></body>'
+    return HttpResponse(html)
+
+
 def index(request):	
     employees = Employee.objects.all()
     
@@ -46,7 +51,11 @@ def person(request):
         employee_id = '1'
 
     employee = Employee.objects.get(id=employee_id)
-    return render(request, "person.html", context={'employee':employee})
+    context = {'employee':employee, 
+               'sizes':Clothing_sizes.objects.get(employee_id=employee_id), 
+               'driver_license':Driver_license.objects.get(employee_id=employee_id)}
+
+    return render(request, "person.html", context)
 
 def add_person(request):
     employee_form = EmployeeForm()
@@ -54,21 +63,7 @@ def add_person(request):
     if request.method == 'GET': return render(request, 'add_person.html', {"form": employee_form})
     elif request.method == 'POST':
         data = request.POST
-        employee = Employee.objects.create(name = data['name'], 
-                                           second_name = data['second_name'],
-                                           third_name = data['third_name'],
-                                           rank = Rank.objects.get(id=int(data['rank'])),
-                                           post = Post.objects.get(id=int(data['post'])),
-                                           b_day = date(int(data['b_day_year']), int(data['b_day_month']), int(data['b_day_day'])),
-                                           personal_num = data['personal_num'],
-                                           phone_number = data['phone_number'],
-                                           address = data['address'],
-                                           group = data['group'],
-                                           family_status = data['family_status'],
-                                           place_of_bd = data['place_of_bd'],
-                                           appointment_order_num = data['appointment_order_num'],
-                                           appointment_order_date = date(int(data['appointment_order_date_year']), int(data['appointment_order_date_month']), int(data['appointment_order_date_day'])))
-        employee.save()
+        Employee.objects.create(data).save()
         return render(request, 'add_person.html', {'text':'Сотрудник успешно добавлен', 'form':employee_form})
     else:
         return render(request, "index.html", {'text':'Error'})
@@ -76,23 +71,22 @@ def add_person(request):
 
 def information(request):
     data = request.POST
-    employee_id = data['employee_id']
+    employee_id = request.POST['employee_id']
     employee = Employee.objects.get(id=employee_id)
     if data.get('filling', 'False') == 'True':
-        if data['table_name'] == 'Property': PropertyForm(data).save()
-        elif data['table_name'] == 'Promotions': PromotionsForm(data).save()
-        elif data['table_name'] == 'Relatives': RelativesForm(data).save()
-        elif data['table_name'] == 'Auto': AutoForm(data).save()
-        elif data['table_name'] == 'Vaccination': VaccinationForm(data).save()
-        elif data['table_name'] == 'Education': EducationForm(data).save()
-        elif data['table_name'] == 'Training': TrainingForm(data).save()
-        elif data['table_name'] == 'Weapons': WeaponsForm(data).save()
+        add_to_model_functions = {'Property': PropertyForm(data).save(), 
+                     'Promotions': PromotionsForm(data).save(), 
+                     'Relatives': RelativesForm(data).save(), 
+                     'Auto': AutoForm(data).save(), 
+                     'Vaccination': VaccinationForm(data).save(), 
+                     'Education': EducationForm(data).save(),
+                     'Training': TrainingForm(data).save(),
+                     'Weapons': WeaponsForm(data).save()}
+        add_to_model_functions[data['table_name']]
         
     table_name = data['table_name']
     table = tables[table_name].objects.filter(employee_id=employee_id)
-    property_form, promotions_form, relatives_form = PropertyForm(), PromotionsForm(), RelativesForm()
-    auto_form, vaccination_form, education_form = AutoForm(), VaccinationForm(), EducationForm()
-    training_form, weapons_form = TrainingForm(), WeaponsForm()
+    property_form, promotions_form, relatives_form, auto_form, vaccination_form, education_form, training_form, weapons_form = PropertyForm(), PromotionsForm(), RelativesForm(), AutoForm(), VaccinationForm(), EducationForm(), TrainingForm(), WeaponsForm()
 
     context = {'table': table ,
                'table_name': table_name,

@@ -27,7 +27,7 @@
     <tr>
         <td><input required name="name"></td>
         <td><input required name="inv_num"></td>
-        <td><input required name="date_of_rec" type="date"></td>
+        <td>{{property_form.date_of_rec}}</td>
         <td><input required name="status"></td>
         <td><input required name="description"></td>
     </tr>
@@ -57,7 +57,7 @@
     <tr>
         <td><input required name='promotion_type'></td>
         <td><input required name='rights'></td>
-        <td><input type="date" required name='date'></td>
+        <td>{{promotions_form.date}}</td>
         <td><input required name='order_num'></td>
         <td><input required name='description'></td>
     </tr>
@@ -223,47 +223,7 @@
 
 {% endif %}
 
-{% comment %}Driver_license  {% endcomment %}
-{%if table_name == "Driver_license"%}
-<table>
-    <tr>
-        <th>A</th><td></td>
-    </tr>
-    <tr>
-        <th>B</th><td></td>
-    </tr>
-    <tr>
-        <th>BE</th><td></td>
-    </tr>
-    <tr>
-        <th>C</th><td></td>
-    </tr>
-    <tr>
-        <th>CE</th><td></td>
-    </tr>
-    <tr>
-        <th>D</th><td></td>
-    </tr>
-    <tr>
-        <th>DE</th><td></td>
-    </tr>
-</table>
-{% endif %}
 
-{% comment %}Clothing_sizes  {% endcomment %}
-{%if table_name == "Clothing_sizes"%}
-<table>
-    <tr>
-        <th>Размер головного убора</th><td></td>
-    </tr>
-    <tr>
-        <th>Размер обуви</th><td></td>
-    </tr>
-    <tr>
-        <th>Размер одежды</th><td></td>
-    </tr>
-</table>
-{% endif %}
 <button type='submit' value='True' name='filling'>Добавить запись</button>
 <input type="hidden" name="table_name" value="{{table_name}}">
 <input type="hidden" name="employee_id" value="{{employee_id}}">
