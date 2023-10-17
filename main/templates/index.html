@@ -12,10 +12,12 @@
                     <th onclick="sortStringColumn(2)">Звание</th>
                     <th onclick="sortStringColumn(3)">Должность</th>
                     <th onclick="sortStringColumn(4)">Группа</th>
+                    <th>Изменить</th>
+                    <th>Очистить</th>
                 </tr>
                 {%for employee in data%} 
                 <tr>
-                    <td>{{employee.id}}</td>
+                    <th>{{employee.id}}</th>
                     <td>
                         <form action='person' method='POST'>
                             {% csrf_token %}
@@ -27,6 +29,8 @@
                     <td>{{employee.rank.rank_name}}</td>
                     <td>{{employee.post.post_name}}</td>
                     <td>{{employee.group_num}}</td>
+                    <td><button></button></td>
+                    <td><button></button></td>
                 </tr>
                 {% endfor %}
         </table>

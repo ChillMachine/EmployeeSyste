@@ -6,9 +6,6 @@ ranks = [(rank.id, rank.rank_name) for rank in Rank.objects.all()]
 posts = [(post.id, post.post_name) for post in Post.objects.all()]
 groups = [(x, f'Группа №{x}') for x in range(1,6)]
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
 class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
@@ -20,19 +17,20 @@ class AutoForm(ModelForm):
         fields = "__all__"
 
 class PromotionsForm(ModelForm):
+    # date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), label='Дата')
     class Meta:
         model = Promotions
-        fields = "__all__"
+        fields = "__all__"  
         widgets = {
-            'date': forms.DateInput()
-        }       
+            'date_of_rec': forms.DateInput(attrs={'type': 'date'})
+        }  
 
 class PropertyForm(ModelForm):
     class Meta:
         model = Property
         fields = "__all__"
         widgets = {
-            'date_of_rec': forms.DateInput()
+            'date_of_rec': forms.DateInput(attrs={'type': 'date'})
         } 
 
 class RelativesForm(ModelForm):
@@ -44,21 +42,35 @@ class TrainingForm(ModelForm):
     class Meta:
         model = Training
         fields = "__all__"
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'})
+        } 
 
 class WeaponsForm(ModelForm):
     class Meta:
         model = Weapons
         fields = "__all__"
+        widgets = {
+            'date_of_rec': forms.DateInput(attrs={'type': 'date'})
+        } 
+
 
 class VaccinationForm(ModelForm):
     class Meta:
         model = Vaccination
         fields = "__all__"
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'})
+        }
 
 class EducationForm(ModelForm):
     class Meta:
         model = Education
         fields = "__all__"
+        widgets = {
+            'date_of_graduate': forms.DateInput(attrs={'type': 'date'})
+        }
+        
 
 # class Education(models.Model):
 #     grade = models.CharField(max_length=20)

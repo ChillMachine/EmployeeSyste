@@ -24,17 +24,20 @@ tables = {  'Property':Property,
             'Weapons': Weapons,
             'Driver_license': Driver_license,
             'Clothing_sizes': Clothing_sizes}
-
-
-def sample_view(request):
-    html = '<body><h1>Django sample_view</h1><br><p>Отладка sample_view</p></body>'
-    return HttpResponse(html)
+my_forms = {'Property': PropertyForm, 
+                     'Promotions': PromotionsForm, 
+                     'Relatives': RelativesForm, 
+                     'Auto': AutoForm, 
+                     'Vaccination': VaccinationForm, 
+                     'Education': EducationForm,
+                     'Training': TrainingForm,
+                     'Weapons': WeaponsForm}
 
 
 def index(request):	
     employees = Employee.objects.all()
-    
     return render(request, "index.html", {'data':employees})
+
 
 def person(request):
     employees = Employee.objects.all()
@@ -51,9 +54,17 @@ def person(request):
         employee_id = '1'
 
     employee = Employee.objects.get(id=employee_id)
-    context = {'employee':employee, 
-               'sizes':Clothing_sizes.objects.get(employee_id=employee_id), 
-               'driver_license':Driver_license.objects.get(employee_id=employee_id)}
+    context = {'employee':employee}
+    try:
+        sizes = Clothing_sizes.objects.get(employee_id=employee_id)
+        context['sizes'] = sizes 
+    except:
+        pass
+    try:
+        driver_license = Driver_license.objects.get(employee_id=employee_id)
+        context['driver_license'] = driver_license
+    except:
+        pass
 
     return render(request, "person.html", context)
 
@@ -74,16 +85,11 @@ def information(request):
     employee_id = request.POST['employee_id']
     employee = Employee.objects.get(id=employee_id)
     if data.get('filling', 'False') == 'True':
-        add_to_model_functions = {'Property': PropertyForm(data).save(), 
-                     'Promotions': PromotionsForm(data).save(), 
-                     'Relatives': RelativesForm(data).save(), 
-                     'Auto': AutoForm(data).save(), 
-                     'Vaccination': VaccinationForm(data).save(), 
-                     'Education': EducationForm(data).save(),
-                     'Training': TrainingForm(data).save(),
-                     'Weapons': WeaponsForm(data).save()}
-        add_to_model_functions[data['table_name']]
+        form = my_forms[data['table_name']](data)
         
+        if form.is_valid():
+            form.save()
+
     table_name = data['table_name']
     table = tables[table_name].objects.filter(employee_id=employee_id)
     property_form, promotions_form, relatives_form, auto_form, vaccination_form, education_form, training_form, weapons_form = PropertyForm(), PromotionsForm(), RelativesForm(), AutoForm(), VaccinationForm(), EducationForm(), TrainingForm(), WeaponsForm()

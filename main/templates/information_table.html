@@ -25,11 +25,11 @@
     </tr>
     {%endfor%}
     <tr>
-        <td><input required name="name"></td>
-        <td><input required name="inv_num"></td>
+        <td>{{property_form.name}}</td>
+        <td>{{property_form.inv_num}}</td>
         <td>{{property_form.date_of_rec}}</td>
-        <td><input required name="status"></td>
-        <td><input required name="description"></td>
+        <td>{{property_form.status}}</td>
+        <td>{{property_form.description}}</td>
     </tr>
 </table>
 {% endif %}
@@ -49,17 +49,17 @@
     <tr>
         <td>{{promotion.promotion_type}}</td>
         <td>{{promotion.rights}}</td>
-        <td>{{promotion.date}}</td>
+        <td>{{promotion.date_of_rec}}</td>
         <td>{{promotion.order_num}}</td>
         <td>{{promotion.description}}</td>
     </tr>
     {% endfor %}
     <tr>
-        <td><input required name='promotion_type'></td>
-        <td><input required name='rights'></td>
-        <td>{{promotions_form.date}}</td>
-        <td><input required name='order_num'></td>
-        <td><input required name='description'></td>
+        <td>{{promotions_form.promotion_type}}</td>
+        <td>{{promotions_form.rights}}</td>
+        <td>{{promotions_form.date_of_rec}}</td>
+        <td>{{promotions_form.order_num}}</td>
+        <td>{{promotions_form.description}}</td>
     </tr>
 </table>
 {% endif %}
@@ -68,21 +68,27 @@
 {%if table_name == "Relatives"%}
 <table>
     <tr>
-        <th>ФИО</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
         <th>Степень родства</th>
         <th>Номер телефона</th>
     </tr>
     {% for relative in table %}
     <tr>
-        <td>{{relative.second_name}} {{relative.name}} {{relative.third_name}}</td>
+        <td>{{relative.second_name}}</td>
+        <td>{{relative.name}}</td>
+        <td>{{relative.third_name}}</td>
         <td>{{relative.relation_degree}}</td>
         <td>{{relative.phone_number}}</td>
     </tr>
     {% endfor %}
     <tr>
-        <td><input required name='FIO'></td>
-        <td><input required name='relation_degree'></td>
-        <td><input required name='phone_number'></td>
+        <td>{{relatives_form.second_name}}</td>
+        <td>{{relatives_form.name}}</td>
+        <td>{{relatives_form.third_name}}</td>
+        <td>{{relatives_form.relation_degree}}</td>
+        <td>{{relatives_form.phone_number}}</td>
     </tr>
 </table>
 {% endif %}
@@ -123,9 +129,9 @@
         </tr>
     {% endfor %}
     <tr>
-        <td><input required name='vaccine_name'></td>
-        <td><input type='date' required name='date'></td>
-        <td><input required name='description'></td>
+        <td>{{vaccination_form.vaccine_name}}</td>
+        <td>{{vaccination_form.date}}</td>
+        <td>{{vaccination_form.description}}</td>
     </tr>
 </table>
 {% endif %}
@@ -150,11 +156,11 @@
     </tr>
     {% endfor %}
     <tr>
-        <td><input required name='grade'></td>
-        <td><input required name='institution'></td>
-        <td><input type='date' required name='date_of_graduate'></td>
-        <td><input required name='speciality'></td>
-        <td><input required name='description'></td>
+        <td>{{education_form.grade}}</td>
+        <td>{{education_form.institution}}</td>
+        <td>{{education_form.date_of_graduate}}</td>
+        <td>{{education_form.speciality}}</td>
+        <td>{{education_form.description}}</td>
     </tr>
 </table>
 {% endif %}
@@ -179,11 +185,11 @@
     </tr>
     {% endfor %}
     <tr>
-        <td><input required name='thread_code'></td>
-        <td><input required name='institution'></td>
-        <td><input type='date' required name='start_date'></td>
-        <td><input required name='duratin'></td>
-        <td><input required name='description'></td>
+        <td>{{training_form.thread_code}}</td>
+        <td>{{training_form.institution}}</td>
+        <td>{{training_form.start_date}}</td>
+        <td>{{training_form.duratin}}</td>
+        <td>{{training_form.description}}</td>
     </tr>
 </table>
 {% endif %}
@@ -205,18 +211,19 @@
         <td>{{weapon.weapon_name}}</td>
         <td>{{weapon.count}}</td>
         <td>{{weapon.weapon_num}}</td>
-        <td>{{weapon.rec_date}}</td>
+        <td>{{weapon.date_of_rec}}</td>
         <td>{{weapon.status}}</td>
         <td>{{weapon.description}}</td>
     </tr>
     {% endfor %}
     <tr>
-        <td><input required name="weapon_name"></td>
-        <td><input required name="count" type="number"></td>
-        <td><input required name="weapon_num"></td>
-        <td><input required name="rec_date" type="date"></td>
-        <td><input required name="status"></td>
-        <td><input required name="description"></td>
+        <td>{{weapons_form.weapon_name}}</td>
+        <td>{{weapons_form.count}}</td>
+        <td>{{weapons_form.weapon_num}}</td>
+        <td>{{weapons_form.date_of_rec}}</td>
+        <td>{{weapons_form.status}}</td>
+        <td>{{weapons_form.description}}</td>
+        
     </tr>
 </table>
 

@@ -27,7 +27,6 @@ urlpatterns = [
     path('person', views.person),
     path('add_person', views.add_person),
     path('information_table', views.information),
-    path('sample/', views.sample_view),
 ]
 
 if settings.DEBUG:
