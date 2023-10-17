@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .my_forms import *
 from .models import *
-from datetime import date
+
 
 table_names = {'Property':'имущество',
                'Promotions':'поощрения', 
@@ -14,7 +13,7 @@ table_names = {'Property':'имущество',
                'Weapons':'закрепленное оружие',
                'Driver_license':'категории водительского удостоверения',
                'Clothing_sizes':'размеры одежды'}
-tables = {  'Property':Property,
+tables = { 'Property':Property,
             'Promotions': Promotions, 
             'Relatives': Relatives, 
             'Auto': Auto,
@@ -24,14 +23,14 @@ tables = {  'Property':Property,
             'Weapons': Weapons,
             'Driver_license': Driver_license,
             'Clothing_sizes': Clothing_sizes}
-my_forms = {'Property': PropertyForm, 
-                     'Promotions': PromotionsForm, 
-                     'Relatives': RelativesForm, 
-                     'Auto': AutoForm, 
-                     'Vaccination': VaccinationForm, 
-                     'Education': EducationForm,
-                     'Training': TrainingForm,
-                     'Weapons': WeaponsForm}
+my_forms = {'property_form': PropertyForm, 
+                     'promotions_form': PromotionsForm, 
+                     'relatives_form': RelativesForm, 
+                     'auto_form': AutoForm, 
+                     'vaccination_form': VaccinationForm, 
+                     'education_form': EducationForm,
+                     'training_form': TrainingForm,
+                     'weapons_form': WeaponsForm}
 
 
 def index(request):	
@@ -85,26 +84,15 @@ def information(request):
     employee_id = request.POST['employee_id']
     employee = Employee.objects.get(id=employee_id)
     if data.get('filling', 'False') == 'True':
-        form = my_forms[data['table_name']](data)
-        
+        form = my_forms[f"{data['table_name'].lower()}_form"](data)
         if form.is_valid():
             form.save()
 
     table_name = data['table_name']
     table = tables[table_name].objects.filter(employee_id=employee_id)
-    property_form, promotions_form, relatives_form, auto_form, vaccination_form, education_form, training_form, weapons_form = PropertyForm(), PromotionsForm(), RelativesForm(), AutoForm(), VaccinationForm(), EducationForm(), TrainingForm(), WeaponsForm()
-
     context = {'table': table ,
                'table_name': table_name,
                'employee_id':employee_id,
-               'title':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table_name]}',
-               'property_form': property_form,
-               'promotions_form': promotions_form,
-               'relatives_form': relatives_form,
-               'auto_form': auto_form,
-               'vaccination_form': vaccination_form,
-               'education_form': education_form,
-               'training_form': training_form,
-               'weapons_form': weapons_form}
+               'title':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table_name]}'} | my_forms
     
     return render(request, "information_table.html", context)
