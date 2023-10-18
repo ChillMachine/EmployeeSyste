@@ -2,15 +2,13 @@ from django import forms
 from django.forms import ModelForm
 from .models import *
 
-ranks = [(rank.id, rank.rank_name) for rank in Rank.objects.all()]
-posts = [(post.id, post.post_name) for post in Post.objects.all()]
 groups = [(x, f'Группа №{x}') for x in range(1,6)]
 
 class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = "__all__"
-
+    
 class AutoForm(ModelForm):
     class Meta:
         model = Auto

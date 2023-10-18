@@ -14,20 +14,21 @@ class Post(models.Model):
     salary = models.CharField(max_length=10)
 
 class Employee(models.Model):
-    name = models.CharField(max_length=20)
-    second_name = models.CharField(max_length=20)
-    third_name = models.CharField(max_length=20) 
-    rank = models.ForeignKey(Rank, on_delete=models.DO_NOTHING)
+    employee_id = models.IntegerField(unique=True)
+    name = models.CharField(max_length=20, blank=True, null=True, default='Вакант')
+    second_name = models.CharField(max_length=20, blank=True, null=True, default='')
+    third_name = models.CharField(max_length=20, blank=True, null=True, default='') 
+    rank = models.ForeignKey(Rank, on_delete=models.DO_NOTHING, blank=True, null=True)
     post = models.ForeignKey(Post, on_delete=models.DO_NOTHING)
-    b_day = models.DateField()
-    personal_num = models.CharField(max_length=4, unique=True)
-    phone_number = models.CharField(max_length=12)
-    address = models.CharField(max_length=20)
+    b_day = models.DateField(blank=True, null=True)
+    personal_num = models.CharField(max_length=4, unique=True, blank=True, null=True)
+    phone_number = models.CharField(max_length=12, blank=True, null=True)
+    address = models.CharField(max_length=20, blank=True, null=True)
     group_num = models.CharField(max_length=10, choices=groups)
-    family_status = models.CharField(max_length=10, choices=family_statuses)
-    place_of_bd = models.CharField(max_length=20)
-    appointment_order_num = models.CharField(max_length=10)
-    appointment_order_date = models.DateField()
+    family_status = models.CharField(max_length=10, choices=family_statuses, blank=True, null=True)
+    place_of_bd = models.CharField(max_length=20, blank=True, null=True)
+    appointment_order_num = models.CharField(max_length=10, blank=True, null=True)
+    appointment_order_date = models.DateField(blank=True, null=True)
 
 class Auto(models.Model):
     model = models.CharField(max_length=20)
@@ -42,13 +43,13 @@ class Promotions(models.Model):
     date_of_rec = models.DateField()
     order_num = models.CharField(max_length=10, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    description = models.CharField(max_length=50, blank=True)
+    description = models.CharField(max_length=50, blank=True, null=True)
 
 class Property(models.Model):
     name = models.CharField(max_length=20)
     inv_num = models.CharField(max_length=20, default='-', blank=True)
     date_of_rec = models.DateField()
-    description = models.CharField(max_length=50, blank=True)
+    description = models.CharField(max_length=50, blank=True, null=True)
     status = models.CharField(max_length=20, default='Выдано')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
@@ -57,7 +58,7 @@ class Relatives(models.Model):
     second_name = models.CharField(max_length=20)
     third_name = models.CharField(max_length=20) 
     relation_degree = models.CharField(max_length=20)
-    phone_number = models.CharField(max_length=12, default='-', blank=True)
+    phone_number = models.CharField(max_length=12, default='-', blank=True, null=True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Training(models.Model):
@@ -65,7 +66,7 @@ class Training(models.Model):
     institution = models.CharField(max_length=20)
     start_date = models.DateField()
     duratin = models.CharField(max_length=10)
-    description = models.CharField(max_length=50, default='-', blank=True)
+    description = models.CharField(max_length=50, default='-', blank=True, null=True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Weapons(models.Model):
@@ -73,14 +74,14 @@ class Weapons(models.Model):
     count = models.IntegerField(default=1, blank=True)
     weapon_num = models.CharField(max_length=20)
     date_of_rec = models.DateField()
-    description = models.CharField(max_length=50, default='-')
+    description = models.CharField(max_length=50, default='-', blank=True, null=True)
     status = models.CharField(max_length=20, default='-')
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Vaccination(models.Model):
     vaccine_name = models.CharField(max_length=20)
     date = models.DateField()
-    description = models.CharField(max_length=50, blank=True)
+    description = models.CharField(max_length=50, blank=True, null=True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Education(models.Model):
@@ -88,7 +89,7 @@ class Education(models.Model):
     institution = models.CharField(max_length=20)
     date_of_graduate = models.DateField()
     speciality = models.CharField(max_length=20, default='-')
-    description = models.CharField(max_length=50)
+    description = models.CharField(max_length=50, blank=True, null=True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 class Driver_license(models.Model):

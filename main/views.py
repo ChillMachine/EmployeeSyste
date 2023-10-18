@@ -3,40 +3,36 @@ from .my_forms import *
 from .models import *
 
 
-table_names = {'Property':'имущество',
-               'Promotions':'поощрения', 
-               'Relatives':'члены семьи', 
-               'Auto':'личные автомобили',
-               'Vaccination':'вакцинация',
-               'Education':'образование',
-               'Training':'переподготовка',
-               'Weapons':'закрепленное оружие',
-               'Driver_license':'категории водительского удостоверения',
-               'Clothing_sizes':'размеры одежды'}
-tables = { 'Property':Property,
-            'Promotions': Promotions, 
-            'Relatives': Relatives, 
-            'Auto': Auto,
-            'Vaccination': Vaccination,
-            'Education': Education,
-            'Training': Training,
-            'Weapons': Weapons,
-            'Driver_license': Driver_license,
-            'Clothing_sizes': Clothing_sizes}
-my_forms = {'property_form': PropertyForm, 
-                     'promotions_form': PromotionsForm, 
-                     'relatives_form': RelativesForm, 
-                     'auto_form': AutoForm, 
-                     'vaccination_form': VaccinationForm, 
-                     'education_form': EducationForm,
-                     'training_form': TrainingForm,
-                     'weapons_form': WeaponsForm}
+tables = { 'Property':Property, 'Promotions': Promotions, 'Relatives': Relatives, 
+           'Auto': Auto, 'Vaccination': Vaccination, 'Education': Education, 
+           'Training': Training, 'Weapons': Weapons}
+table_names = {'Property':'имущество', 'Promotions':'поощрения', 'Relatives':'члены семьи', 
+               'Auto':'личные автомобили', 'Vaccination':'вакцинация', 'Education':'образование',
+               'Training':'переподготовка', 'Weapons':'закрепленное оружие'}
+my_forms = {'property_form': PropertyForm, 'promotions_form': PromotionsForm, 'relatives_form': RelativesForm, 
+            'auto_form': AutoForm, 'vaccination_form': VaccinationForm, 'education_form': EducationForm,
+            'training_form': TrainingForm, 'weapons_form': WeaponsForm}
 
 
-def index(request):	
+def index(request):
+    if request.method == 'POST':
+        data = request.POST
+        if data['button'] == 'del' :
+            employee_to_del = Employee.objects.get(id=data['employee_id'])
+            vacansy_data = {'id':int(data['employee_id']),
+                            'post':employee_to_del.post.id,
+                            'group_num':employee_to_del.group_num}
+            
+            vacansy = EmployeeForm(data=vacansy_data)
+            if vacansy.is_valid():
+                vacansy.save()
+                employee_to_del.delete()
+
+        elif data['button'] == 'edit':
+            pass
+
     employees = Employee.objects.all()
     return render(request, "index.html", {'data':employees})
-
 
 def person(request):
     employees = Employee.objects.all()
@@ -70,7 +66,8 @@ def person(request):
 def add_person(request):
     employee_form = EmployeeForm()
     
-    if request.method == 'GET': return render(request, 'add_person.html', {"form": employee_form})
+    if request.method == 'GET': 
+        return render(request, 'add_person.html', {"form": employee_form})
     elif request.method == 'POST':
         data = request.POST
         Employee.objects.create(data).save()
