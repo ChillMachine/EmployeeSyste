@@ -3,3 +3,4 @@ Django
 sqlparse
 typing_extensions
 tzdata
+django-debug-toolbar
