@@ -17,13 +17,14 @@
                 </tr>
                 {%for employee in data%} 
                 <tr>
-                    <th>{{employee.id}}</th>
+                    <td>{{employee.post_num}}</td>
                     <td>
                         <form action='person' method='POST'>
                             {% csrf_token %}
-                            <button name='employee_id' value="{{employee.id}}">
+                            <button name='post_num' value="{{employee.post_num}}">
                                 {{employee.second_name}} {{employee.name}} {{employee.third_name}}
                             </button>
+                            <input type='hidden' name='employee_id' value="{{employee.id}}">
                         </form>
                     </td>
                     <td>{{employee.rank.rank_name}}</td>
@@ -36,7 +37,7 @@
                     </td>
                     <td>
                             <button name='button' type='submit' value='edit'>Изменить сотрудника</button>
-                            <input type='hidden' name='employee_id' value={{employee.id}}>
+                            <input type='hidden' name='employee_id' value="{{employee.id}}">
                         </form>
                     </td>
                 </tr>

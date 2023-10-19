@@ -19,14 +19,13 @@ def index(request):
         data = request.POST
         if data['button'] == 'del' :
             employee_to_del = Employee.objects.get(id=data['employee_id'])
-            vacansy_data = {'id':int(data['employee_id']),
-                            'post':employee_to_del.post.id,
-                            'group_num':employee_to_del.group_num}
-            
-            vacansy = EmployeeForm(data=vacansy_data)
-            if vacansy.is_valid():
-                vacansy.save()
-                employee_to_del.delete()
+            vacansy_data = {'post_num':employee_to_del.post_num,
+                            'post':employee_to_del.post,
+                            'group_num':employee_to_del.group_num,
+                            'rank':employee_to_del.post.rank}
+
+            employee_to_del.delete()
+            Employee.objects.create(**vacansy_data)
 
         elif data['button'] == 'edit':
             pass
@@ -35,31 +34,23 @@ def index(request):
     return render(request, "index.html", {'data':employees})
 
 def person(request):
-    employees = Employee.objects.all()
-    employee_id = request.POST.get('employee_id')
-    direction = request.POST.get('direction', None)
+    data = request.POST
+    employees_count = len(Employee.objects.all())
+    direction = data.get('direction', None)
+    post_num = Employee.objects.get(id=data['employee_id']).post_num
+
     if direction == '+':
-        employee_id = str(int(employee_id) + 1)
+        post_num = str(int(post_num) + 1)
     elif direction == '-':
-        employee_id = str(int(employee_id) - 1)
+        post_num = str(int(post_num) - 1)
 
-    if int(employee_id) < 1:
-        employee_id = str(len(employees))
-    elif int(employee_id) > len(employees):
-        employee_id = '1'
+    if int(post_num) < 1:
+        post_num = str(employees_count)
+    elif int(post_num) > employees_count:
+        post_num = '1'
 
-    employee = Employee.objects.get(id=employee_id)
+    employee = Employee.objects.get(id=Employee.objects.get(post_num=post_num).id)
     context = {'employee':employee}
-    try:
-        sizes = Clothing_sizes.objects.get(employee_id=employee_id)
-        context['sizes'] = sizes 
-    except:
-        pass
-    try:
-        driver_license = Driver_license.objects.get(employee_id=employee_id)
-        context['driver_license'] = driver_license
-    except:
-        pass
 
     return render(request, "person.html", context)
 

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Сотрудник {{employee.id}}{% endblock title %}
-{% block header %}Сотрудник {{employee.id}}{% endblock header %}
+{% block title %}Сотрудник {{employee.post_num}}{% endblock title %}
+{% block header %}Сотрудник {{employee.post_num}}{% endblock header %}
 {% block content %}
 {% load static %}
 <h1>{{employee.second_name}} {{employee.name}} {{employee.third_name}}</h1>
@@ -36,15 +36,17 @@
     <div class="button-container">
         <form method="POST" action="/person">
             {%csrf_token%}
-            <input type="submit" name="direction" value="Предыдущий сотрудник" >
+            <input type="submit" name="direction" value="Предыдущий сотрудник" id='left'>
             <input type="hidden" value="-" name="direction">
             <input type="hidden" value="{{employee.id}}" name="employee_id">
+            <input type="hidden" value="{{employee.post_num}}" name="post_num">
         </form>
         <form method="POST" action="/person">
             {%csrf_token%}
-            <input type="submit" name="direction" value="Следующий сотрудник" >
+            <input type="submit" name="direction" value="Следующий сотрудник" id='right'>
             <input type="hidden" value="+" name="direction">
             <input type="hidden" value="{{employee.id}}" name="employee_id">
+            <input type="hidden" value="{{employee.post_num}}" name="post_num">
         </form>
     </div>
 </br>
@@ -66,40 +68,19 @@
                 <input name="employee_id" type="hidden" value='{{employee.id}}'>
             </form>
         </div>
-<!-- <h3>Дополнительная информация</h3>
-<table>
-    <tr>
-        <th>A</th><td>{{driver_license.A}}</td>
-    </tr>
-    <tr>
-        <th>B</th><td>{{driver_license.B}}</td>
-    </tr>
-    <tr>
-        <th>BE</th><td>{{driver_license.BE}}</td>
-    </tr>
-    <tr>
-        <th>C</th><td>{{driver_license.C}}</td>
-    </tr>
-    <tr>
-        <th>CE</th><td>{{driver_license.CE}}</td>
-    </tr>
-    <tr>
-        <th>D</th><td>{{driver_license.D}}</td>
-    </tr>
-    <tr>
-        <th>DE</th><td>{{driver_license.DE}}</td>
-    </tr>
-</table>
-<table>
-    <tr>
-        <th>Размер головного убора</th><td>{{sizes.head_size}}</td>
-    </tr>
-    <tr>
-        <th>Размер обуви</th><td>{{sizes.shoes_size}}</td>
-    </tr>
-    <tr>
-        <th>Размер одежды</th><td>{{sizes.cloth_size}}</td>
-    </tr>
-</table> -->
-
+<script>
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowLeft') {
+        var buttonToClick = document.getElementById('left');
+        if (buttonToClick) {
+          buttonToClick.click();
+        }
+      } else if (event.key === 'ArrowRight') {
+        var buttonToClick = document.getElementById('right');
+        if (buttonToClick) {
+          buttonToClick.click();
+        }
+      }
+    });
+  </script>
 {% endblock content %}

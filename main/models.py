@@ -14,7 +14,7 @@ class Post(models.Model):
     salary = models.CharField(max_length=10)
 
 class Employee(models.Model):
-    employee_id = models.IntegerField(unique=True)
+    post_num = models.IntegerField(unique=True)
     name = models.CharField(max_length=20, blank=True, null=True, default='Вакант')
     second_name = models.CharField(max_length=20, blank=True, null=True, default='')
     third_name = models.CharField(max_length=20, blank=True, null=True, default='') 
@@ -22,13 +22,15 @@ class Employee(models.Model):
     post = models.ForeignKey(Post, on_delete=models.DO_NOTHING)
     b_day = models.DateField(blank=True, null=True)
     personal_num = models.CharField(max_length=4, unique=True, blank=True, null=True)
-    phone_number = models.CharField(max_length=12, blank=True, null=True)
-    address = models.CharField(max_length=20, blank=True, null=True)
+    phone_number = models.CharField(max_length=12, blank=True, null=True, default='')
+    address = models.CharField(max_length=20, blank=True, null=True, default='')
     group_num = models.CharField(max_length=10, choices=groups)
-    family_status = models.CharField(max_length=10, choices=family_statuses, blank=True, null=True)
-    place_of_bd = models.CharField(max_length=20, blank=True, null=True)
-    appointment_order_num = models.CharField(max_length=10, blank=True, null=True)
+    family_status = models.CharField(max_length=10, choices=family_statuses, blank=True, null=True, default='')
+    place_of_bd = models.CharField(max_length=20, blank=True, null=True, default='')
+    appointment_order_num = models.CharField(max_length=10, blank=True, null=True, default='')
     appointment_order_date = models.DateField(blank=True, null=True)
+    class Meta:
+        ordering = ['post_num']
 
 class Auto(models.Model):
     model = models.CharField(max_length=20)
