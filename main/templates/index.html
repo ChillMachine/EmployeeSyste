@@ -33,10 +33,11 @@
                     <td>
                         <form action='/' method='POST'>
                             {% csrf_token %}
-                            <button name='button' type='submit' value='del'>Удалить сотрудника</button>
+                            <button name='button' type='submit' value='edit'>Изменить сотрудника</button>   
                     </td>
                     <td>
-                            <button name='button' type='submit' value='edit'>Изменить сотрудника</button>
+                            <button name='button' type='submit' value='del'>Удалить сотрудника</button>
+                            
                             <input type='hidden' name='employee_id' value="{{employee.id}}">
                         </form>
                     </td>

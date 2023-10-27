@@ -27,10 +27,12 @@ urlpatterns = [
     path('person', views.person),
     path('add_person', views.add_person),
     path('information_table', views.information),
+    
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
+        path('admin/', admin.site.urls),
     ] + urlpatterns
