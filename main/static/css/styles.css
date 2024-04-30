@@ -58,9 +58,9 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
-  border-radius: 10px; /* Задаем скругление углов для всей таблицы */
+  border-radius: 10px; 
   overflow: hidden;
-  border: 2px solid black;
+
 
 }
 
@@ -69,8 +69,12 @@ table th, table td {
   width: auto;
   padding: 8px;
   text-align: center;
-  height: 15%;
+  height: 80px;
   
+}
+
+tr {
+  border: #000;
 }
 
 table th {
@@ -104,7 +108,7 @@ select{
 }
 
 button:hover {
-  transition: background-color 1s, color 1s; /* Анимируем как background-color, так и color */
+  transition: background-color 0.5s, color 0.5s; /* Анимируем как background-color, так и color */
   background-color: #000000;
   color: #88BDBC;
 }
