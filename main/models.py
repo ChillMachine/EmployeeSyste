@@ -1,17 +1,23 @@
 from django.db import models
 from datetime import date
 
-family_statuses = [('Холост', 'Холост'),('Женат', 'Женат'),('В разводе', 'В разводе')]
+family_statuses = [('холост', 'холост'),('женат', 'женат'),('в разводе', 'в разводе')]
 groups = [('-','-'),('Группа 1','Группа 1'),('Группа 2','Группа 2'),('Группа 3','Группа 3'),('Группа 4','Группа 4'),('Группа 5','Группа 5')]
 
 class Rank(models.Model):
     rank_name = models.CharField(max_length=20, unique=True)
     salary = models.CharField(max_length=10)
+    
+    def __str__(self):
+        return self.rank_name
 
 class Post(models.Model):
     post_name = models.CharField(max_length=20, unique=True)
     rank = models.ForeignKey(Rank, on_delete=models.DO_NOTHING)
     salary = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.post_name
 
 class Employee(models.Model):
     post_num = models.IntegerField(unique=True)
@@ -25,7 +31,7 @@ class Employee(models.Model):
     phone_number = models.CharField(max_length=12, blank=True, null=True, default='')
     address = models.CharField(max_length=20, blank=True, null=True, default='')
     group_num = models.CharField(max_length=10, choices=groups)
-    family_status = models.CharField(max_length=10, choices=family_statuses, blank=True, null=True, default='')
+    family_status = models.CharField(max_length=10, choices=family_statuses, blank=True, null=True)
     place_of_bd = models.CharField(max_length=20, blank=True, null=True, default='')
     appointment_order_num = models.CharField(max_length=10, blank=True, null=True, default='')
     appointment_order_date = models.DateField(blank=True, null=True)

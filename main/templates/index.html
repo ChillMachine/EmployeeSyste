@@ -3,7 +3,7 @@
 {% block header %}Главная{% endblock header %}
 {% block content %}
 <script type='text/javascript'></script>
-    {{text}}
+    {{msg}}
     <div>
         <table id ='my_table' class="resizable">
                 <tr>
@@ -12,7 +12,7 @@
                     <th onclick="sortStringColumn(2)">Звание</th>
                     <th onclick="sortStringColumn(3)">Должность</th>
                     <th onclick="sortStringColumn(4)">Группа</th>
-                    <th style='width: 5%'>Очистить</th>
+                    <th style='width: 5%'></th>
                 </tr>
                 {%for employee in data%} 
                 <tr>
@@ -30,8 +30,9 @@
                     <td>{{employee.post.post_name}}</td>
                     <td>{{employee.group_num}}</td>
                     <td>
+                        <form action='' method='POST'>
+                            {% csrf_token %}
                             <button name='button' type='submit' value='del'>Удалить сотрудника</button>
-                            
                             <input type='hidden' name='employee_id' value="{{employee.id}}">
                         </form>
                     </td>

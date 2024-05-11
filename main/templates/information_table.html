@@ -14,6 +14,7 @@
         <th>Дата получения</th>
         <th>Отмета о сдаче</th>
         <th>Примечание</th>
+        <th>Удалить</th>
     </tr>
     {%for property in table %}
     <tr>
@@ -22,6 +23,9 @@
         <td>{{property.date_of_rec}}</td>
         <td>{{property.status}}</td>
         <td>{{property.description}}</td>
+        <td>
+                <button form='1' name='row_del' type='submit' value="{{property.id}}">Удалить</button>
+        </td>
     </tr>
     {%endfor%}
     <tr>
@@ -44,6 +48,7 @@
         <th>Дата приказа</th>
         <th>Номер приказа</th>
         <th>Примечание</th>
+        <th>Удалить</th>
     </tr>
     {% for promotion in table %}
     <tr>
@@ -52,6 +57,9 @@
         <td>{{promotion.date_of_rec}}</td>
         <td>{{promotion.order_num}}</td>
         <td>{{promotion.description}}</td>
+        <td>
+            <button name='row_del' type='submit' value="{{promotion.id}}">Удалить</button>
+        </td>
     </tr>
     {% endfor %}
     <tr>
@@ -73,6 +81,7 @@
         <th>Отчество</th>
         <th>Степень родства</th>
         <th>Номер телефона</th>
+        <th>Удалить</th>
     </tr>
     {% for relative in table %}
     <tr>
@@ -81,6 +90,9 @@
         <td>{{relative.third_name}}</td>
         <td>{{relative.relation_degree}}</td>
         <td>{{relative.phone_number}}</td>
+        <td>
+            <button name='row_del' type='submit' value="{{relative.id}}">Удалить</button>
+        </td>
     </tr>
     {% endfor %}
     <tr>
@@ -99,11 +111,15 @@
     <tr>
         <th>Модель</th>
         <th>Гос.регистрационный номер</th>
+        <th>Удалить</th>
     </tr>
     {% for auto in table %}
         <tr>
             <td>{{auto.model}}</td>
             <td>{{auto.gos_num}}</td>
+            <td>
+                <button name='row_del' type='submit' value="{{auto.id}}">Удалить</button>
+            </td>
         </tr>
     {% endfor %}
     <tr>
@@ -120,12 +136,16 @@
         <th>Название</th>
         <th>Дата вакцинации</th>
         <th>Примечание</th>
+        <th>Удалить</th>
     </tr>
     {% for vaccine in table %}
         <tr>
             <td>{{vaccine.vaccine_name}}</td>
             <td>{{vaccine.date}}</td>
             <td>{{vaccine.description}}</td>
+            <td>
+                <button name='row_del' type='submit' value="{{vaccine.id}}">Удалить</button>
+            </td>
         </tr>
     {% endfor %}
     <tr>
@@ -145,6 +165,7 @@
         <th>Дата выпуска</th>
         <th>Специальность</th>
         <th>Примечание</th>
+        <th>Удалить</th>
     </tr>
     {% for educ in table %}
     <tr>
@@ -153,6 +174,9 @@
         <td>{{educ.date_of_graduate}}</td>
         <td>{{educ.speciality}}</td>
         <td>{{educ.description}}</td>
+        <td>
+            <button name='row_del' type='submit' value="{{educ.id}}">Удалить</button>
+        </td>
     </tr>
     {% endfor %}
     <tr>
@@ -174,6 +198,7 @@
         <th>Дата начала обучения</th>
         <th>Продолжительность</th>
         <th>Примечание</th>
+        <th>Удалить</th>
     </tr>
     {% for train in table %}
     <tr>
@@ -182,6 +207,9 @@
         <td>{{train.start_date}}</td>
         <td>{{train.duratin}}</td>
         <td>{{train.description}}</td>
+        <td>
+            <button name='row_del' type='submit' value="{{train.id}}">Удалить</button>
+        </td>
     </tr>
     {% endfor %}
     <tr>
@@ -204,6 +232,7 @@
         <th>Дата получения</th>
         <th>Отметка о сдаче</th>
         <th>Примечание</th>
+        <th>Удалить</th>
     </tr>
 
     {% for weapon in table %}
@@ -214,6 +243,9 @@
         <td>{{weapon.date_of_rec}}</td>
         <td>{{weapon.status}}</td>
         <td>{{weapon.description}}</td>
+        <td>
+            <button name='row_del' type='submit' value="{{weapon.id}}">Удалить</button>
+        </td>
     </tr>
     {% endfor %}
     <tr>
@@ -238,5 +270,11 @@
 <form method="POST" action="person">
     {% csrf_token %}
     <button name='employee_id' value="{{employee_id}}">Вернуться к сотруднику</button>
-</form>      
+</form>
+
+<form id='1' method='POST' action='information_table'>
+    {% csrf_token %}
+    <input type="hidden" name="table_name" value="{{table_name}}">
+    <input type="hidden" name="employee_id" value="{{employee_id}}">
+</form>
 {% endblock content %}

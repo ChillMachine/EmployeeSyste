@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Сотрудник {{employee.post_num}}{% endblock title %}
+{% block header %}Сотрудник {{employee.post_num}}{% endblock header %}
+{% block content %}
+{% load static %}
+<h1>{{employee.second_name}} {{employee.name}} {{employee.third_name}}</h1>
+    <form method="POST" action='person'>
+        {% csrf_token %}
+            <table>
+                <tr><th>Фамилия</th><td><input name='second_name' value="{{employee.second_name}}"></td></tr>
+                <tr><th>Имя</th><td><input name='name' value="{{employee.name}}"></td></td></tr>
+                <tr><th>Отчество</th><td><input name='third_name' value="{{employee.third_name}}"></td></tr>
+                <tr><th>Звание</th><td>{{form.rank}}</td></tr>
+                <tr><th>Должность</th><td>{{form.post}}</td></tr>
+                <tr><th>Группа</th><td>{{form.group_num}}</td></tr>
+                <tr><th>Номер приказа о назначении</th><td><input name='order_num' value="{{employee.appointment_order_num}}"></td></tr>
+                <tr><th>Дата приказа</th><td><input name='order_date' type="date" value="{{employee.appointment_order_date|date:'Y-m-d'}}"></td></tr>
+                <tr><th>Дата рождения</th><td><input name='b_day' type="date" value="{{employee.b_day|date:'Y-m-d'}}"></td></tr>
+                <tr><th>Место рождения</th><td><input name='place_of_bd' value="{{employee.place_of_bd}}"></td></tr>
+                <tr><th>Номер телефона</th><td><input name='phone_number' value="{{employee.phone_number}}"></td></tr>
+                <tr><th>Семейное положение</th><td>{{form.family_status}}</td></tr>
+                <tr><th>Личный номер</th><td><input name='personal_num' value="{{employee.personal_num}}"></td></tr>
+                <tr><th>Адрес места жительства</th><td><input name='address' value="{{employee.address}}"></td></tr>
+            </table>
+            <input type="submit" value="Изменить" style='width:100%'>
+            <input type='hidden' name='msg' value='Информация о пользователе изменена'>
+            <input type='hidden' name='employee_id' value={{employee.id}}>
+            <input type='hidden' name='edit_button' value='edited'>
+        </form>
+
+{% endblock content %}
+
+
+
+    

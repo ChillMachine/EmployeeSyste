@@ -3,6 +3,10 @@
 {% block header %}Сотрудник {{employee.post_num}}{% endblock header %}
 {% block content %}
 {% load static %}
+{%if msg%}
+<h2>{{msg}}<h2>
+{%endif%}
+{% if employee.name != 'Вакант' %}
 <h1>{{employee.second_name}} {{employee.name}} {{employee.third_name}}</h1>
 <table style="width: 100%;">
     <tr>
@@ -33,6 +37,9 @@
     </tr>
 </table>
 </br>
+{% else %}
+    <h1>Должность вакантна</h1>
+{% endif %}
     <div class="button-container">
         <form method="POST" action="/person">
             {%csrf_token%}
@@ -43,14 +50,14 @@
         </form>
         <form method="POST" action="/person">
             {%csrf_token%}
-            <button name='direction' id='right'>Предыдущий сотрудник</button>
+            <button name='direction' id='right'>Следующий сотрудник</button>
             <input type="hidden" value="+" name="direction">
             <input type="hidden" value="{{employee.id}}" name="employee_id">
             <input type="hidden" value="{{employee.post_num}}" name="post_num">
         </form>
     </div>
 </br>
-
+{% if employee.name != 'Вакант' %}
         <div class="button-container">
             <form method="POST" action="information_table">
                 {% csrf_token %}
@@ -66,12 +73,21 @@
                 <!-- <button name='table_name' value="Driver_license">Категории водительского удостоверения</button>
                 <button name='table_name' value="Clothing_sizes">Размеры одежды</button> -->
                 <input name="employee_id" type="hidden" value='{{employee.id}}'>
+                <button >Категории водительского удостоверения</button>
+                <button >Размеры формы одежды</button>
             </form>
+                
         </div>
-        <br><br><br>
+        <br><br>
         <div>
-          <button>Изменить информацию о сотруднике</button>
+          <form action='edit' method='POST'>
+            {% csrf_token %}
+            <button name='employee_id' value="{{employee.id}}">Изменить информацию о сотруднике</button>
+          </form>
         </div>
+{% else %}
+  
+{% endif %}
 <script>
     document.addEventListener('keydown', function(event) {
       if (event.key === 'ArrowLeft') {
