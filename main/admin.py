@@ -13,8 +13,8 @@ admin.site.register(Training)
 admin.site.register(Weapons)
 admin.site.register(Vaccination)
 admin.site.register(Education)
-admin.site.register(Driver_license)
-admin.site.register(Clothing_sizes)
+# admin.site.register(Driver_license)
+# admin.site.register(Clothing_sizes)
 
 
 

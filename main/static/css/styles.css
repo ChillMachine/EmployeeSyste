@@ -82,7 +82,7 @@ table th {
 
 table tr:hover {
   background-color:  #88BDBC;
-  color: #000;
+  color: #254E58;
   transition: background-color 0.5s, color 0.5s;
 }
 
@@ -105,7 +105,7 @@ select{
 
 button:hover {
   transition: background-color 0.5s, color 0.5s; 
-  background-color: #000000;
+  background-color: #254E58;
   color: #88BDBC;
 }
 

@@ -39,7 +39,12 @@
 </br>
 {% else %}
     <h1>Должность вакантна</h1>
+    <form action='edit' method='POST'>
+      {% csrf_token %}
+      <button name='employee_id' value="{{employee.id}}">Добавить сотрудника</button>
+    </form>
 {% endif %}
+</br>
     <div class="button-container">
         <form method="POST" action="/person">
             {%csrf_token%}
@@ -70,11 +75,7 @@
                 <button name='table_name' value="Education">Образование</button>
                 <button name='table_name' value="Training">Переподготовка</button>
                 <button name='table_name' value="Weapons">Закрепленное оружие</button>
-                <!-- <button name='table_name' value="Driver_license">Категории водительского удостоверения</button>
-                <button name='table_name' value="Clothing_sizes">Размеры одежды</button> -->
                 <input name="employee_id" type="hidden" value='{{employee.id}}'>
-                <button >Категории водительского удостоверения</button>
-                <button >Размеры формы одежды</button>
             </form>
                 
         </div>

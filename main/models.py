@@ -100,19 +100,19 @@ class Education(models.Model):
     description = models.CharField(max_length=50, blank=True, null=True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
-class Driver_license(models.Model):
-    A = models.BooleanField()
-    B = models.BooleanField()
-    BE = models.BooleanField()
-    C = models.BooleanField()
-    CE = models.BooleanField()
-    D = models.BooleanField()
-    DE = models.BooleanField()
-    employee_id = models.OneToOneField(Employee, on_delete=models.CASCADE, primary_key = True)
+# class Driver_license(models.Model):
+#     A = models.BooleanField()
+#     B = models.BooleanField()
+#     BE = models.BooleanField()
+#     C = models.BooleanField()
+#     CE = models.BooleanField()
+#     D = models.BooleanField()
+#     DE = models.BooleanField()
+#     employee_id = models.OneToOneField(Employee, on_delete=models.CASCADE, primary_key = True)
 
-class Clothing_sizes(models.Model):
-    head_size = models.CharField(max_length=10)
-    shoes_size = models.CharField(max_length=10)
-    cloth_size = models.CharField(max_length=10)
-    employee_id = models.OneToOneField(Employee, on_delete=models.CASCADE, primary_key = True)
+# class Clothing_sizes(models.Model):
+#     head_size = models.CharField(max_length=10)
+#     shoes_size = models.CharField(max_length=10)
+#     cloth_size = models.CharField(max_length=10)
+#     employee_id = models.OneToOneField(Employee, on_delete=models.CASCADE, primary_key = True)
 

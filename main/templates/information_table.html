@@ -2,7 +2,7 @@
 {% block title %}{{title}}{% endblock title %}
 {% block header %}{{title}}{% endblock header %}
 {% block content %}
-
+{% load static %}
 <form method="POST" action="information_table">
 {% csrf_token %}   
 {% comment %}Property  +++++++++++++++++++{% endcomment %}
@@ -24,7 +24,7 @@
         <td>{{property.status}}</td>
         <td>{{property.description}}</td>
         <td>
-                <button form='1' name='row_del' type='submit' value="{{property.id}}">Удалить</button>
+                <button form='1' name='row_del' type='submit' value="{{property.id}}" style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
         </td>
     </tr>
     {%endfor%}
@@ -34,6 +34,7 @@
         <td>{{property_form.date_of_rec}}</td>
         <td>{{property_form.status}}</td>
         <td>{{property_form.description}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
     </tr>
 </table>
 {% endif %}
@@ -58,7 +59,7 @@
         <td>{{promotion.order_num}}</td>
         <td>{{promotion.description}}</td>
         <td>
-            <button name='row_del' type='submit' value="{{promotion.id}}">Удалить</button>
+            <button form='1' name='row_del' type='submit' value="{{promotion.id}}" style='padding: 3px; height: 40px; width: 40px'>><img height='25' src="{% static "images/del_button.png" %}"></button>
         </td>
     </tr>
     {% endfor %}
@@ -68,6 +69,7 @@
         <td>{{promotions_form.date_of_rec}}</td>
         <td>{{promotions_form.order_num}}</td>
         <td>{{promotions_form.description}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
     </tr>
 </table>
 {% endif %}
@@ -91,7 +93,7 @@
         <td>{{relative.relation_degree}}</td>
         <td>{{relative.phone_number}}</td>
         <td>
-            <button name='row_del' type='submit' value="{{relative.id}}">Удалить</button>
+            <button form='1' name='row_del' type='submit' value="{{relative.id}}" style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
         </td>
     </tr>
     {% endfor %}
@@ -101,6 +103,7 @@
         <td>{{relatives_form.third_name}}</td>
         <td>{{relatives_form.relation_degree}}</td>
         <td>{{relatives_form.phone_number}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
     </tr>
 </table>
 {% endif %}
@@ -118,13 +121,14 @@
             <td>{{auto.model}}</td>
             <td>{{auto.gos_num}}</td>
             <td>
-                <button name='row_del' type='submit' value="{{auto.id}}">Удалить</button>
+                <button form='1' name='row_del' type='submit' value="{{auto.id}}" style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
             </td>
         </tr>
     {% endfor %}
     <tr>
         <td>{{auto_form.model}}</td>
         <td>{{auto_form.gos_num}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
     </tr>
 </table>
 {% endif %}
@@ -144,7 +148,7 @@
             <td>{{vaccine.date}}</td>
             <td>{{vaccine.description}}</td>
             <td>
-                <button name='row_del' type='submit' value="{{vaccine.id}}">Удалить</button>
+                <button form='1' name='row_del' type='submit' value="{{vaccine.id}}" style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
             </td>
         </tr>
     {% endfor %}
@@ -152,6 +156,7 @@
         <td>{{vaccination_form.vaccine_name}}</td>
         <td>{{vaccination_form.date}}</td>
         <td>{{vaccination_form.description}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
     </tr>
 </table>
 {% endif %}
@@ -175,7 +180,7 @@
         <td>{{educ.speciality}}</td>
         <td>{{educ.description}}</td>
         <td>
-            <button name='row_del' type='submit' value="{{educ.id}}">Удалить</button>
+            <button form='1' name='row_del' type='submit' value="{{educ.id}}" style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
         </td>
     </tr>
     {% endfor %}
@@ -185,6 +190,7 @@
         <td>{{education_form.date_of_graduate}}</td>
         <td>{{education_form.speciality}}</td>
         <td>{{education_form.description}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
     </tr>
 </table>
 {% endif %}
@@ -208,7 +214,7 @@
         <td>{{train.duratin}}</td>
         <td>{{train.description}}</td>
         <td>
-            <button name='row_del' type='submit' value="{{train.id}}">Удалить</button>
+            <button form='1' name='row_del' type='submit' value="{{train.id}}" style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
         </td>
     </tr>
     {% endfor %}
@@ -218,6 +224,7 @@
         <td>{{training_form.start_date}}</td>
         <td>{{training_form.duratin}}</td>
         <td>{{training_form.description}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
     </tr>
 </table>
 {% endif %}
@@ -244,7 +251,7 @@
         <td>{{weapon.status}}</td>
         <td>{{weapon.description}}</td>
         <td>
-            <button name='row_del' type='submit' value="{{weapon.id}}">Удалить</button>
+            <button form='1' name='row_del' type='submit' value="{{weapon.id}}" style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
         </td>
     </tr>
     {% endfor %}
@@ -255,6 +262,7 @@
         <td>{{weapons_form.date_of_rec}}</td>
         <td>{{weapons_form.status}}</td>
         <td>{{weapons_form.description}}</td>
+        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
         
     </tr>
 </table>
@@ -262,8 +270,6 @@
 
 {% endif %}
 
-
-<button type='submit' value='True' name='filling'>Добавить запись</button>
 <input type="hidden" name="table_name" value="{{table_name}}">
 <input type="hidden" name="employee_id" value="{{employee_id}}">
 </form>
