@@ -3,17 +3,18 @@
 {% block header %}{{title}}{% endblock header %}
 {% block content %}
 {% load static %}
+<script type='text/javascript'></script>
 <form method="POST" action="information_table">
 {% csrf_token %}   
 {% comment %}Property  +++++++++++++++++++{% endcomment %}
 {%if table_name == "Property"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Название</th>
-        <th>Инвентарный номер</th>
-        <th>Дата получения</th>
-        <th>Отмета о сдаче</th>
-        <th>Примечание</th>
+        <th onclick="sortStringColumn(0)">Название</th>
+        <th onclick="sortStringColumn(1)">Инвентарный номер</th>
+        <th onclick="sortDateColumn(2)">Дата получения</th>
+        <th onclick="sortStringColumn(3)">Отмета о сдаче</th>
+        <th onclick="sortStringColumn(4)">Примечание</th>
         <th>Удалить</th>
     </tr>
     {%for property in table %}
@@ -29,12 +30,12 @@
     </tr>
     {%endfor%}
     <tr>
-        <td>{{property_form.name}}</td>
-        <td>{{property_form.inv_num}}</td>
-        <td>{{property_form.date_of_rec}}</td>
-        <td>{{property_form.status}}</td>
-        <td>{{property_form.description}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{property_form.name}}</th>
+        <th>{{property_form.inv_num}}</th>
+        <th>{{property_form.date_of_rec}}</th>
+        <th>{{property_form.status}}</th>
+        <th>{{property_form.description}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
     </tr>
 </table>
 {% endif %}
@@ -42,13 +43,13 @@
 
 {% comment %}Promotions  ++++++++++++++++++{% endcomment %}
 {%if table_name == "Promotions"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Тип поощрения/взыскания</th>
-        <th>Чьими правами</th>
-        <th>Дата приказа</th>
-        <th>Номер приказа</th>
-        <th>Примечание</th>
+        <th onclick="sortStringColumn(0)">Тип поощрения/взыскания</th>
+        <th onclick="sortStringColumn(1)">Чьими правами</th>
+        <th onclick="sortDateColumn(2)">Дата приказа</th>
+        <th onclick="sortStringColumn(3)">Номер приказа</th>
+        <th onclick="sortStringColumn(4)">Примечание</th>
         <th>Удалить</th>
     </tr>
     {% for promotion in table %}
@@ -64,25 +65,25 @@
     </tr>
     {% endfor %}
     <tr>
-        <td>{{promotions_form.promotion_type}}</td>
-        <td>{{promotions_form.rights}}</td>
-        <td>{{promotions_form.date_of_rec}}</td>
-        <td>{{promotions_form.order_num}}</td>
-        <td>{{promotions_form.description}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{promotions_form.promotion_type}}</th>
+        <th>{{promotions_form.rights}}</th>
+        <th>{{promotions_form.date_of_rec}}</th>
+        <th>{{promotions_form.order_num}}</th>
+        <th>{{promotions_form.description}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
     </tr>
 </table>
 {% endif %}
 
 {% comment %}Relatives  +++++++++++++++++{% endcomment %}
 {%if table_name == "Relatives"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Отчество</th>
-        <th>Степень родства</th>
-        <th>Номер телефона</th>
+        <th onclick="sortStringColumn(0)">Фамилия</th>
+        <th onclick="sortStringColumn(1)">Имя</th>
+        <th onclick="sortStringColumn(2)">Отчество</th>
+        <th onclick="sortStringColumn(3)">Степень родства</th>
+        <th onclick="sortStringColumn(4)">Номер телефона</th>
         <th>Удалить</th>
     </tr>
     {% for relative in table %}
@@ -98,22 +99,22 @@
     </tr>
     {% endfor %}
     <tr>
-        <td>{{relatives_form.second_name}}</td>
-        <td>{{relatives_form.name}}</td>
-        <td>{{relatives_form.third_name}}</td>
-        <td>{{relatives_form.relation_degree}}</td>
-        <td>{{relatives_form.phone_number}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{relatives_form.second_name}}</th>
+        <th>{{relatives_form.name}}</th>
+        <th>{{relatives_form.third_name}}</th>
+        <th>{{relatives_form.relation_degree}}</th>
+        <th>{{relatives_form.phone_number}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
     </tr>
 </table>
 {% endif %}
 
 {% comment %}Auto  ++++++++++++++++++++{% endcomment %}
 {%if table_name == "Auto"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Модель</th>
-        <th>Гос.регистрационный номер</th>
+        <th onclick="sortStringColumn(0)">Модель</th>
+        <th onclick="sortStringColumn(1)">Гос.регистрационный номер</th>
         <th>Удалить</th>
     </tr>
     {% for auto in table %}
@@ -126,20 +127,20 @@
         </tr>
     {% endfor %}
     <tr>
-        <td>{{auto_form.model}}</td>
-        <td>{{auto_form.gos_num}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{auto_form.model}}</th>
+        <th>{{auto_form.gos_num}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
     </tr>
 </table>
 {% endif %}
 
 {% comment %}Vaccination  +++++++++++++++{% endcomment %}
 {%if table_name == "Vaccination"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Название</th>
-        <th>Дата вакцинации</th>
-        <th>Примечание</th>
+        <th onclick="sortStringColumn(0)">Название</th>
+        <th onclick="sortDateColumn(1)">Дата вакцинации</th>
+        <th onclick="sortStringColumn(2)">Примечание</th>
         <th>Удалить</th>
     </tr>
     {% for vaccine in table %}
@@ -153,23 +154,23 @@
         </tr>
     {% endfor %}
     <tr>
-        <td>{{vaccination_form.vaccine_name}}</td>
-        <td>{{vaccination_form.date}}</td>
-        <td>{{vaccination_form.description}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{vaccination_form.vaccine_name}}</th>
+        <th>{{vaccination_form.date}}</th>
+        <th>{{vaccination_form.description}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
     </tr>
 </table>
 {% endif %}
 
 {% comment %}Education  ++++++++++++++++{% endcomment %}
 {%if table_name == "Education"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Степень</th>
-        <th>Учебное заведение</th>
-        <th>Дата выпуска</th>
-        <th>Специальность</th>
-        <th>Примечание</th>
+        <th onclick="sortStringColumn(0)">Степень</th>
+        <th onclick="sortStringColumn(1)">Учебное заведение</th>
+        <th onclick="sortDateColumn(2)">Дата выпуска</th>
+        <th onclick="sortStringColumn(3)">Специальность</th>
+        <th onclick="sortStringColumn(4)">Примечание</th>
         <th>Удалить</th>
     </tr>
     {% for educ in table %}
@@ -185,25 +186,25 @@
     </tr>
     {% endfor %}
     <tr>
-        <td>{{education_form.grade}}</td>
-        <td>{{education_form.institution}}</td>
-        <td>{{education_form.date_of_graduate}}</td>
-        <td>{{education_form.speciality}}</td>
-        <td>{{education_form.description}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{education_form.grade}}</th>
+        <th>{{education_form.institution}}</th>
+        <th>{{education_form.date_of_graduate}}</th>
+        <th>{{education_form.speciality}}</th>
+        <th>{{education_form.description}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
     </tr>
 </table>
 {% endif %}
 
 {% comment %}Training  +++++++++++++++{% endcomment %}
 {%if table_name == "Training"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Код потока</th>
-        <th>Учебное заведение</th>
-        <th>Дата начала обучения</th>
-        <th>Продолжительность</th>
-        <th>Примечание</th>
+        <th onclick="sortStringColumn(0)">Код потока</th>
+        <th onclick="sortStringColumn(1)">Учебное заведение</th>
+        <th onclick="sortDateColumn(2)">Дата начала обучения</th>
+        <th onclick="sortStringColumn(3)">Продолжительность</th>
+        <th onclick="sortStringColumn(4)">Примечание</th>
         <th>Удалить</th>
     </tr>
     {% for train in table %}
@@ -219,26 +220,26 @@
     </tr>
     {% endfor %}
     <tr>
-        <td>{{training_form.thread_code}}</td>
-        <td>{{training_form.institution}}</td>
-        <td>{{training_form.start_date}}</td>
-        <td>{{training_form.duratin}}</td>
-        <td>{{training_form.description}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{training_form.thread_code}}</th>
+        <th>{{training_form.institution}}</th>
+        <th>{{training_form.start_date}}</th>
+        <th>{{training_form.duratin}}</th>
+        <th>{{training_form.description}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
     </tr>
 </table>
 {% endif %}
 
 {% comment %}Weapons  ++++++++++++++++++++++{% endcomment %}
 {%if table_name == "Weapons"%}
-<table>
+<table id ='my_table' class="resizable">
     <tr>
-        <th>Название</th>
-        <th>Количество</th>
-        <th>Номер</th>
-        <th>Дата получения</th>
-        <th>Отметка о сдаче</th>
-        <th>Примечание</th>
+        <th onclick="sortStringColumn(0)">Название</th>
+        <th onclick="sortNumberColumn(1)">Количество</th>
+        <th onclick="sortNumberColumn(2)">Номер</th>
+        <th onclick="sortDateColumn(3)">Дата получения</th>
+        <th onclick="sortStringColumn(4)">Отметка о сдаче</th>
+        <th onclick="sortStringColumn(5)">Примечание</th>
         <th>Удалить</th>
     </tr>
 
@@ -256,13 +257,13 @@
     </tr>
     {% endfor %}
     <tr>
-        <td>{{weapons_form.weapon_name}}</td>
-        <td>{{weapons_form.count}}</td>
-        <td>{{weapons_form.weapon_num}}</td>
-        <td>{{weapons_form.date_of_rec}}</td>
-        <td>{{weapons_form.status}}</td>
-        <td>{{weapons_form.description}}</td>
-        <td><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></td>
+        <th>{{weapons_form.weapon_name}}</th>
+        <th>{{weapons_form.count}}</th>
+        <th>{{weapons_form.weapon_num}}</th>
+        <th>{{weapons_form.date_of_rec}}</th>
+        <th>{{weapons_form.status}}</th>
+        <th>{{weapons_form.description}}</th>
+        <th><button type='submit' value='True' name='filling' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/add.png" %}"></button></th>
         
     </tr>
 </table>
