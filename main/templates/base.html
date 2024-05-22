@@ -14,7 +14,19 @@
         <nav>
             <div class="button-container">
                 <form action="/">
-                    <button>Главная</button>
+                    {% csrf_token %}
+                    <button>Общий список</button>
+                </form>
+                <form method="post" action="tables">
+                    {% csrf_token %}
+                    <button name="table_name" value="Property">Имущество</button>
+                    <button name="table_name" value="Weapons">Оружие</button>
+                    <button name="table_name" value="Promotions">Поощрения</button>
+                    <button name="table_name" value="Relatives">Родственники</button>
+                    <button name="table_name" value="Vaccination">Вакцинация</button>
+                    <button name="table_name" value="Education">Образование</button>
+                    <button name="table_name" value="Training">Переподготовка</button>
+                    <button name="table_name" value="Auto">Автомобили</button>
                 </form>
             </div>
             </ul>

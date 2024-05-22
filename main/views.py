@@ -3,7 +3,8 @@ from .my_forms import *
 from .models import *
 
 
-tables = { 'Property':Property, 'Promotions': Promotions, 'Relatives': Relatives, 
+
+table_dict  = { 'Property':Property, 'Promotions': Promotions, 'Relatives': Relatives, 
            'Auto': Auto, 'Vaccination': Vaccination, 'Education': Education, 
            'Training': Training, 'Weapons': Weapons}
 table_names = {'Property':'имущество', 'Promotions':'поощрения', 'Relatives':'члены семьи', 
@@ -17,14 +18,18 @@ def index(request):
     if request.method == 'POST':
         data = request.POST
         if 'button' in data and data['button'] == 'del':
-            employee_to_del = Employee.objects.get(id=data['employee_id'])
-            vacansy_data = {'post_num':employee_to_del.post_num,
-                            'post':employee_to_del.post,
-                            'group_num':employee_to_del.group_num,
-                            'rank':employee_to_del.post.rank}
+            try:
+                employee_to_del = Employee.objects.get(id=data['employee_id'])
+                vacansy_data = {'post_num':employee_to_del.post_num,
+                                'post':employee_to_del.post,
+                                'group_num':employee_to_del.group_num,
+                                'rank':employee_to_del.post.rank}
 
-            employee_to_del.delete()
-            Employee.objects.create(**vacansy_data)
+                employee_to_del.delete()
+                Employee.objects.create(**vacansy_data)
+            except:
+                pass
+
 
     employees = Employee.objects.all()
     context = {'data':employees}
@@ -91,13 +96,13 @@ def information(request):
                 form.save()
 
         table_name = data['table_name']
-        table = tables[table_name].objects.filter(employee_id=employee_id)
+        table = table_dict[table_name].objects.filter(employee_id=employee_id)
         context = {'table': table ,
                 'table_name': table_name,
                 'employee_id':employee_id,
                 'title':f'{employee.second_name} {employee.name} {employee.third_name} - {table_names[table_name]}'} | my_forms
         if 'row_del' in data:
-            row_to_del = tables[data['table_name']].objects.get(id=data['row_del'])
+            row_to_del = table_dict[data['table_name']].objects.get(id=data['row_del'])
             row_to_del.delete()
 
         return render(request, "information_table.html", context)
@@ -118,6 +123,22 @@ def edit(request):
 
             
         return render(request, "edit.html", context)
+
+    else:
+        employees = Employee.objects.all()
+        context = {'data':employees}
+        return render(request, "index.html", context)
+    
+
+def tables(request):
+    if request.method == 'POST':
+        data = request.POST
+        table_name = data['table_name']
+        table = table_dict[table_name].objects.all()
+        # employees = Employee.objects.all()
+        # employee_dict = {employee.id: f'{employee.second_name} {employee.name} {employee.third_name}' for employee in employees}
+        context = {'table_name':table_name, 'table':table, 'title':f'{table_names[table_name]}'.title()}         
+        return render(request, "tables.html", context)
 
     else:
         employees = Employee.objects.all()

@@ -31,9 +31,11 @@
                     <td>{{employee.post.post_name}}</td>
                     <td>{{employee.group_num}}</td>
                     <td>
-                        <form action='' method='POST'>
+                        <form action='' method='POST' onsubmit="return confirmDelete()">
                             {% csrf_token %}
-                            <button name='button' type='submit' value='del' style='padding: 3px; height: 40px; width: 40px'><img height='25' src="{% static "images/del_button.png" %}"></button>
+                            <button name='button' type='submit' value='del' style='padding: 3px; height: 40px; width: 40px'>
+                                <img height='25' src="{% static "images/del_button.png" %}">
+                            </button>
                             <input type='hidden' name='employee_id' value="{{employee.id}}">
                         </form>
                     </td>

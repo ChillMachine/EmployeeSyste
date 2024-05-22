@@ -6,7 +6,7 @@
 <script type='text/javascript'></script>
 <form method="POST" action="information_table">
 {% csrf_token %}   
-{% comment %}Property  +++++++++++++++++++{% endcomment %}
+
 {%if table_name == "Property"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -40,8 +40,6 @@
 </table>
 {% endif %}
 
-
-{% comment %}Promotions  ++++++++++++++++++{% endcomment %}
 {%if table_name == "Promotions"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -75,7 +73,6 @@
 </table>
 {% endif %}
 
-{% comment %}Relatives  +++++++++++++++++{% endcomment %}
 {%if table_name == "Relatives"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -109,7 +106,6 @@
 </table>
 {% endif %}
 
-{% comment %}Auto  ++++++++++++++++++++{% endcomment %}
 {%if table_name == "Auto"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -134,7 +130,6 @@
 </table>
 {% endif %}
 
-{% comment %}Vaccination  +++++++++++++++{% endcomment %}
 {%if table_name == "Vaccination"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -162,7 +157,6 @@
 </table>
 {% endif %}
 
-{% comment %}Education  ++++++++++++++++{% endcomment %}
 {%if table_name == "Education"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -196,7 +190,6 @@
 </table>
 {% endif %}
 
-{% comment %}Training  +++++++++++++++{% endcomment %}
 {%if table_name == "Training"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -230,7 +223,6 @@
 </table>
 {% endif %}
 
-{% comment %}Weapons  ++++++++++++++++++++++{% endcomment %}
 {%if table_name == "Weapons"%}
 <table id ='my_table' class="resizable">
     <tr>
@@ -267,7 +259,6 @@
         
     </tr>
 </table>
-
 
 {% endif %}
 

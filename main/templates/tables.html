@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock title %}
+{% block header %}{{title}}{% endblock header %}
+{% block content %}
+{% load static %}
+<script type='text/javascript'></script>
+<form method="POST" action="information_table">
+{% csrf_token %}   
+
+{%if table_name == "Property"%}
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumberColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Наименование имущества</th>
+        <th onclick="sortStringColumn(3)">Инвентарный номер</th>
+        <th onclick="sortDateColumn(4)">Дата получения</th>
+        <th onclick="sortStringColumn(5)">Описание</th>
+        <th onclick="sortStringColumn(6)">Статус</th>
+    </tr>
+    {%for property in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{property.employee_id}}</td>
+        <td>{{property.name}}</td>
+        <td>{{property.inv_num}}</td>
+        <td>{{property.date_of_rec}}</td>
+        <td>{{property.description}}</td>
+        <td>{{property.staus}}</td>
+    </tr>
+
+    {%endfor%}
+</table>
+
+{%elif table_name == "Weapons"%}
+
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Наименование вооружения</th>
+        <th onclick="sortNumColumn(3)">Количество</th>
+        <th onclick="sortStringColumn(4)">Номер</th>
+        <th onclick="sortDateColumn(5)">Дата получения</th>
+        <th onclick="sortStringColumn(6)">Описание</th>
+        <th onclick="sortStringColumn(7)">Статус</th>
+    </tr>
+    {%for weapon in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{weapon.employee_id}}</td>
+        <td>{{weapon.weapon_name}}</td>
+        <td>{{weapon.count}}</td>
+        <td>{{weapon.weapon_num}}</td>
+        <td>{{weapon.date_of_rec}}</td>
+        <td>{{weapon.description}}</td>
+        <td>{{weapon.status}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%elif table_name == "Promotions"%}
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Тип поощрения</th>
+        <th onclick="sortStringColumn(3)">Кем поощрен</th>
+        <th onclick="sortDateColumn(4)">Дата поощрения</th>
+        <th onclick="sortStringColumn(5)">Номер приказа</th>
+        <th onclick="sortStringColumn(6)">Описание</th>
+    </tr>
+    {%for promotion in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{promotion.employee_id}}</td>
+        <td>{{promotion.promotion_type}}</td>
+        <td>{{promotion.rights}}</td>
+        <td>{{promotion.date_of_rec}}</td>
+        <td>{{promotion.order_num}}</td>
+        <td>{{promotion.description}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%elif table_name == "Relatives"%}
+
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Фамилия</th>
+        <th onclick="sortStringColumn(3)">Имя</th>
+        <th onclick="sortStringColumn(4)">Отчество</th>
+        <th onclick="sortStringColumn(5)">Степень родства</th>
+        <th onclick="sortStringColumn(6)">Номер телефона</th>
+    </tr>
+    {%for relative in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{relative.employee_id}}</td>
+        <td>{{relative.second_name}}</td>
+        <td>{{relative.name}}</td>
+        <td>{{relative.third_name}}</td>
+        <td>{{relative.relation_degree}}</td>
+        <td>{{relative.phone_number}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%elif table_name == "Vaccination"%}
+
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Вакцина</th>
+        <th onclick="sortDateColumn(3)">Дата вакцинации</th>
+        <th onclick="sortStringColumn(4)">Описание</th>
+    </tr>
+    {%for vaccine in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{vaccine.employee_id}}</td>
+        <td>{{vaccine.vaccine_name}}</td>
+        <td>{{vaccine.date}}</td>
+        <td>{{vaccine.description}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%elif table_name == "Education"%}
+
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Степень</th>
+        <th onclick="sortStringColumn(3)">Учебное заведение</th>
+        <th onclick="sortDateColumn(4)">Дата выпуска</th>
+        <th onclick="sortStringColumn(5)">Специальность</th>
+        <th onclick="sortStringColumn(6)">Описание</th>
+    </tr>
+    {%for education in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{education.employee_id}}</td>
+        <td>{{education.grade}}</td>
+        <td>{{education.institution}}</td>
+        <td>{{education.date_of_graduate}}</td>
+        <td>{{education.speciality}}</td>
+        <td>{{education.description}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%elif table_name == "Training"%}
+
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Код потока</th>
+        <th onclick="sortStringColumn(3)">Учебное заведение</th>
+        <th onclick="sortDateColumn(4)">Дата начала обучения</th>
+        <th onclick="sortStringColumn(5)">Продолжительность</th>
+        <th onclick="sortStringColumn(6)">Описание</th>
+    </tr>
+    {%for training in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{training.employee_id}}</td>
+        <td>{{training.thread_code}}</td>
+        <td>{{training.institution}}</td>
+        <td>{{training.start_date}}</td>
+        <td>{{training.duratin}}</td>
+        <td>{{training.description}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{%elif table_name == "Auto"%}
+
+<table id ='my_table' class="resizable">
+    <tr>
+        <th onclick="sortNumColumn(0)">№</th>
+        <th onclick="sortStringColumn(1)">ФИО сотрудника</th>
+        <th onclick="sortStringColumn(2)">Модель</th>
+        <th onclick="sortStringColumn(3)">Государственный регистрационный знак</th>
+
+    </tr>
+    {%for auto in table %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{auto.employee_id}}</td>
+        <td>{{auto.model}}</td>
+        <td>{{auto.gos_num}}</td>
+
+    </tr>
+    {%endfor%}
+</table>
+{% endif %}
+
+
+{% endblock content %}

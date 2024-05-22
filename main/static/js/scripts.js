@@ -134,3 +134,9 @@ function parseDate(dateString) {
     var year = parseInt(parts[2]);
     return new Date(year, month, day);
 }
+
+
+function confirmDelete() {
+    var result = confirm("Вы уверены, что хотите удалить элемент?");
+    return result;
+}

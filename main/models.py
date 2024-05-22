@@ -38,6 +38,9 @@ class Employee(models.Model):
     class Meta:
         ordering = ['post_num']
 
+    def __str__(self):
+        return f'{self.second_name} {self.name} {self.third_name}'   
+
 class Auto(models.Model):
     model = models.CharField(max_length=20)
     gos_num = models.CharField(max_length=10)
